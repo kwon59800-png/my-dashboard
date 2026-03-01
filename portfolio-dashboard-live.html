@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Portfolio Command Center v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0f19;--card:#111827;--card2:#0f172a;--bdr:#1e293b;--txt:#e2e8f0;--dim:#64748b;--dim2:#475569;--g:#00d4aa;--r:#ff4757;--a:#fbbf24;--b:#3b82f6;--p:#a855f7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;font-size:13px;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}
+.w{max-width:960px;margin:0 auto;padding:10px}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdr);margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.hd h1{font-size:13px;font-weight:900;letter-spacing:1.2px;background:linear-gradient(135deg,var(--g),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hd .sub{font-size:8px;color:var(--dim);margin-top:2px}
+.hd .rv{text-align:right}.hd .rv .lb{font-size:8px;color:var(--dim)}.hd .rv .vl{font-size:15px;font-weight:900}
+.cg{color:var(--g)}.cr{color:var(--r)}.ca{color:var(--a)}.cb{color:var(--b)}.cp{color:var(--p)}
+.topbar{padding:8px 10px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;margin-bottom:8px}
+.topbar .row1{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.topbar .status{font-size:9px;color:var(--dim)}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px;vertical-align:middle}
+.dot-live{background:var(--g);box-shadow:0 0 6px var(--g)}.dot-off{background:var(--r)}.dot-load{background:var(--a);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.topbar .acts{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.topbar input{width:155px;padding:4px 7px;border-radius:5px;font-size:10px;font-family:inherit;background:var(--card2);color:var(--a);border:1px solid var(--bdr);outline:none}
+.topbar input:focus{border-color:var(--a)}
+.topbar input::placeholder{color:var(--dim2)}
+.btn{padding:5px 10px;border-radius:5px;border:none;font-size:9px;font-weight:700;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.btn-g{background:var(--g);color:#000}.btn-b{background:var(--b);color:#fff}.btn-a{background:var(--a);color:#000}.btn-p{background:var(--p);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.prog{margin-bottom:8px}.prog .bar{height:4px;background:var(--bdr);border-radius:2px;overflow:hidden}
+.prog .fill{height:100%;background:linear-gradient(90deg,var(--g),var(--b));border-radius:2px;transition:width .3s}
+.prog .info{font-size:8px;color:var(--dim);margin-top:3px;display:flex;justify-content:space-between}
+.errlog{margin-bottom:6px;padding:5px 8px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.2);border-radius:6px;font-size:9px;color:var(--r);line-height:1.4}
+.st{display:flex;gap:4px;margin-bottom:8px;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch}
+.st::-webkit-scrollbar{height:2px}.st::-webkit-scrollbar-thumb{background:var(--bdr)}
+.st button{flex-shrink:0;padding:5px 9px;border-radius:6px;border:1px solid var(--bdr);background:transparent;color:var(--dim);font-family:inherit;font-size:9px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.st button.on{border-color:var(--g);background:rgba(0,212,170,.08);color:#fff}
+.st .dum{border-style:dashed;opacity:.45;font-size:8px}
+.tb{display:flex;gap:2px;margin-bottom:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tb::-webkit-scrollbar{height:0}
+.tb button{flex-shrink:0;padding:6px 10px;border-radius:6px;border:none;font-size:9px;font-weight:700;font-family:inherit;cursor:pointer;background:transparent;color:var(--dim);-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.tb button.on{background:var(--b);color:#fff}
+.cd{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px;margin-bottom:8px}
+.cd.warn{border-color:rgba(255,71,87,.2)}
+.ct{font-size:10px;font-weight:700;margin-bottom:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.bx{padding:5px;background:var(--card2);border-radius:4px}.bx .lb{color:var(--dim);font-size:7px}.bx .vl{font-weight:700;font-size:10px;margin-top:1px}
+.tbl{width:100%;border-collapse:collapse;font-size:9px}
+.tbl th{padding:4px 2px;text-align:center;color:var(--dim);font-weight:600;font-size:7px;border-bottom:1px solid var(--bdr);white-space:nowrap}
+.tbl td{padding:4px 2px;text-align:center;border-bottom:1px solid rgba(30,41,59,.15)}
+.tbl tr.ck{cursor:pointer}.tbl tr.ck:hover{background:rgba(30,41,59,.3)}
+.pl{padding:2px 5px;border-radius:4px;font-size:7px;font-weight:800;display:inline-block}
+.sb{margin-bottom:4px}.sb .tp{display:flex;justify-content:space-between;font-size:8px;color:var(--dim);margin-bottom:2px}
+.sb .br{height:4px;background:var(--bdr);border-radius:3px;position:relative;overflow:hidden}
+.sb .fl{height:100%;border-radius:3px;position:absolute}.sb .cn{position:absolute;left:50%;top:0;width:1px;height:100%;background:var(--dim2)}
+.sg{margin-top:10px;padding:10px;background:var(--card2);border-radius:8px;text-align:center}
+.sg .nm{font-size:20px;font-weight:900;letter-spacing:2px}.sg .ds{font-size:8px;color:var(--dim);margin-top:3px}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:5px}
+.ai{padding:8px;border-radius:8px;background:var(--card2)}.ai .ab{height:3px;background:var(--bdr);border-radius:2px;margin-top:4px}.ai .af{height:100%;border-radius:2px}
+.el{max-height:200px;overflow-y:auto}.er{display:flex;align-items:flex-start;gap:5px;padding:3px 0;border-bottom:1px solid rgba(30,41,59,.1);font-size:9px}
+.tr{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.ti{width:55px;padding:3px 5px;border-radius:4px;font-size:10px;font-family:inherit;background:var(--card2);color:var(--a);border:1px solid rgba(251,191,36,.3);text-align:right;outline:none}
+.ti:focus{border-color:var(--a)}
+.cc{position:relative;width:100%;height:140px}.cc canvas{width:100%!important;height:100%!important}
+.lg{display:flex;gap:8px;font-size:7px;color:var(--dim);justify-content:center;margin-top:3px}
+.lg i{display:inline-block;width:10px;height:2px;border-radius:1px;margin-right:2px;vertical-align:middle}
+input[type=range]{width:100%;accent-color:var(--a);cursor:pointer;height:22px}
+.sec-card{background:var(--card2);border-radius:8px;padding:10px;border-left:3px solid var(--dim)}
+.sec-bar{height:6px;background:var(--bdr);border-radius:3px;overflow:hidden;margin-top:4px}
+.sec-fill{height:100%;border-radius:3px;transition:width .3s}
+.quota{font-size:8px;color:var(--dim);padding:2px 6px;background:var(--card2);border-radius:4px}
+.badge{font-size:7px;padding:1px 4px;border-radius:3px;font-weight:700}
+.rank-num{display:inline-flex;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000}
+.tgt-wrap{display:flex;align-items:center;gap:8px;background:var(--card2);padding:6px 10px;border-radius:6px;border:1px solid var(--bdr);margin-top:4px}
+.tgt-wrap:focus-within{border-color:var(--a);box-shadow:0 0 8px rgba(251,191,36,.15)}
+.tgt-input{width:80px;padding:4px 6px;border-radius:4px;font-size:12px;font-weight:700;font-family:inherit;background:transparent;color:var(--a);border:none;text-align:right;outline:none}
+.tgt-ret{font-size:14px;font-weight:900;min-width:70px;text-align:right}
+.tgt-bar{height:4px;border-radius:2px;margin-top:4px;background:var(--bdr);overflow:hidden;position:relative}
+.tgt-bar .tgt-fill{position:absolute;height:100%;border-radius:2px;transition:width .2s,left .2s}
+.metric-bar{display:flex;align-items:center;gap:4px;margin:3px 0}
+.metric-bar .mb-label{font-size:7px;color:var(--dim);width:28px;flex-shrink:0;text-align:right}
+.metric-bar .mb-track{flex:1;height:8px;background:var(--bdr);border-radius:4px;overflow:hidden}
+.metric-bar .mb-fill{height:100%;border-radius:4px;transition:width .3s}
+.metric-bar .mb-val{font-size:8px;font-weight:700;width:38px;text-align:right;flex-shrink:0}
+.hm-cell{padding:8px 4px;border-radius:6px;text-align:center;transition:transform .15s;cursor:default}
+.hm-cell:hover{transform:scale(1.05)}
+.hm-cell .hm-nm{font-size:8px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.hm-cell .hm-val{font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);margin-top:1px}
+.hm-cell .hm-etf{font-size:6px;color:rgba(255,255,255,.7);margin-top:1px}
+.beta-badge{font-size:7px;padding:1px 5px;border-radius:3px;font-weight:800;display:inline-block;margin-left:3px;letter-spacing:.3px}
+.ft{text-align:center;padding:8px 0;font-size:7px;color:var(--dim);border-top:1px solid var(--bdr);margin-top:10px}
+.hide{display:none!important}
+@media(max-width:640px){
+  .w{padding:6px}.hd h1{font-size:11px}.hd .rv .vl{font-size:13px}
+  .g2{grid-template-columns:1fr}.ag{grid-template-columns:1fr 1fr}
+  .tbl{font-size:8px}.sg .nm{font-size:16px}.cd{padding:8px}
+  .tb button{padding:5px 8px;font-size:8px}.topbar input{width:120px}
+  .cc{height:120px}
+}
+@media(max-width:380px){.ag{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}.hd{flex-direction:column;align-items:flex-start}.hd .rv{text-align:left}}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="topbar">
+    <div class="row1">
+      <div class="status" id="statusArea"><span class="dot dot-off"></span>API 키를 입력하세요</div>
+      <div class="quota" id="quotaArea">잔여: —/25</div>
+    </div>
+    <div class="acts">
+      <input id="apiKey" type="text" placeholder="Alpha Vantage API Key" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="btn btn-g" id="btnFetch">🔄 전체 스캔</button>
+      <a href="https://www.alphavantage.co/support/#api-key" target="_blank" class="btn btn-b" style="text-decoration:none;font-size:8px">무료키</a>
+    </div>
+  </div>
+  <div class="prog hide" id="progArea">
+    <div class="bar"><div class="fill" id="progFill" style="width:0%"></div></div>
+    <div class="info"><span id="progText">준비 중...</span><span id="progPct">0%</span></div>
+  </div>
+  <div id="errArea"></div>
+  <div class="hd">
+    <div><h1>PORTFOLIO COMMAND CENTER</h1><div class="sub" id="hSub">7 Holdings · S&P 500 Scanner</div></div>
+    <div class="rv"><div class="lb">PORTFOLIO 3M AVG</div><div class="vl" id="hAvg">—</div></div>
+  </div>
+  <div class="st" id="strip"></div>
+  <div class="tb" id="tabs"></div>
+  <div id="pSignal"></div>
+  <div id="pTarget" class="hide"></div>
+  <div id="pPort" class="hide"></div>
+  <div id="pRec" class="hide"></div>
+  <div id="pSector" class="hide"></div>
+  <div class="ft">⚠ 본 대시보드는 투자 조언이 아닙니다. 과거 데이터 기반 분석이며 미래 수익을 보장하지 않습니다.<br>S&P 500 대표 53종목 + GICS 11섹터 ETF · Alpha Vantage Free: 25 calls/day</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════
+// DATA DEFINITIONS
+// ═══════════════════════════════════════════════
+var MYPORT = ["NVDA","TSM","MU","CEG","SOXL","IONQ","CRCL"];
+var TC = {NVDA:"#76B900",TSM:"#E4002B",MU:"#FDB515",CEG:"#00A3E0",SOXL:"#FF6B35",IONQ:"#7B2D8E",CRCL:"#3498DB"};
+var NAMES = {NVDA:"NVIDIA",TSM:"Taiwan Semi",MU:"Micron",CEG:"Constellation Energy",SOXL:"Direxion Semi 3X",IONQ:"IonQ",CRCL:"Circle Internet"};
+var PORT_SEC = {NVDA:"정보기술",TSM:"정보기술",MU:"정보기술",CEG:"유틸리티",SOXL:"레버리지ETF",IONQ:"정보기술",CRCL:"금융"};
+var ALLOC_W = {NVDA:25,TSM:18,MU:18,CEG:12,SOXL:12,IONQ:8,CRCL:7};
+
+// ── GICS 11 Sector ETFs ──
+var SMAP = [
+  {id:"IT",nm:"정보기술",etf:"XLK",co:"#3b82f6",st:["AAPL","MSFT","AVGO","CRM","ADBE"]},
+  {id:"HC",nm:"헬스케어",etf:"XLV",co:"#10b981",st:["UNH","LLY","ABBV","MRK","PFE"]},
+  {id:"FN",nm:"금융",etf:"XLF",co:"#f59e0b",st:["JPM","GS","V","MA","BAC"]},
+  {id:"CD",nm:"경기소비재",etf:"XLY",co:"#ef4444",st:["AMZN","TSLA","HD","MCD","NKE"]},
+  {id:"CS",nm:"커뮤니케이션",etf:"XLC",co:"#8b5cf6",st:["GOOGL","META","NFLX","DIS","TMUS"]},
+  {id:"IN",nm:"산업재",etf:"XLI",co:"#6366f1",st:["CAT","HON","GE","RTX","UPS"]},
+  {id:"CP",nm:"필수소비재",etf:"XLP",co:"#14b8a6",st:["PG","KO","COST","WMT","PEP"]},
+  {id:"EN",nm:"에너지",etf:"XLE",co:"#f97316",st:["XOM","CVX","COP","SLB","EOG"]},
+  {id:"UT",nm:"유틸리티",etf:"XLU",co:"#06b6d4",st:["NEE","DUK","SO","AEP"]},
+  {id:"RE",nm:"부동산",etf:"XLRE",co:"#ec4899",st:["AMT","PLD","CCI","EQIX","SPG"]},
+  {id:"MT",nm:"소재",etf:"XLB",co:"#84cc16",st:["LIN","APD","FCX","NEM","SHW"]}
+];
+
+// Build flat lists
+var SETFS = []; // sector ETFs
+var SP5 = [];   // S&P 500 candidate stocks (excluding portfolio)
+var SP5_INFO = {}; // ticker -> {n:name, sec:sector}
+for (var si=0;si<SMAP.length;si++){
+  SETFS.push(SMAP[si].etf);
+  SP5_INFO[SMAP[si].etf] = {n:SMAP[si].nm+" ETF",sec:SMAP[si].nm};
+  for(var sj=0;sj<SMAP[si].st.length;sj++){
+    var tk=SMAP[si].st[sj];
+    if(MYPORT.indexOf(tk)<0){SP5.push(tk)}
+    SP5_INFO[tk]={n:tk,sec:SMAP[si].nm};
+  }
+}
+// Add friendly names
+var FN={"AAPL":"Apple","MSFT":"Microsoft","AVGO":"Broadcom","CRM":"Salesforce","ADBE":"Adobe","UNH":"UnitedHealth","LLY":"Eli Lilly","ABBV":"AbbVie","MRK":"Merck","PFE":"Pfizer","JPM":"JPMorgan","GS":"Goldman Sachs","V":"Visa","MA":"Mastercard","BAC":"BofA","AMZN":"Amazon","TSLA":"Tesla","HD":"Home Depot","MCD":"McDonald's","NKE":"Nike","GOOGL":"Alphabet","META":"Meta","NFLX":"Netflix","DIS":"Disney","TMUS":"T-Mobile","CAT":"Caterpillar","HON":"Honeywell","GE":"GE Aerospace","RTX":"RTX Corp","UPS":"UPS","PG":"P&G","KO":"Coca-Cola","COST":"Costco","WMT":"Walmart","PEP":"PepsiCo","XOM":"ExxonMobil","CVX":"Chevron","COP":"ConocoPhillips","SLB":"Schlumberger","EOG":"EOG Resources","NEE":"NextEra","DUK":"Duke Energy","SO":"Southern Co","AEP":"AEP","AMT":"American Tower","PLD":"Prologis","CCI":"Crown Castle","EQIX":"Equinix","SPG":"Simon Property","LIN":"Linde","APD":"Air Products","FCX":"Freeport","NEM":"Newmont","SHW":"Sherwin-Williams"};
+for(var fk in FN){if(SP5_INFO[fk])SP5_INFO[fk].n=FN[fk]}
+
+var FC = [
+  {t:"NVDA",lo:220,hi:280,g:"Bullish",cat:"Vera Rubin 출시, 데이터센터 성장"},
+  {t:"TSM",lo:370,hi:440,g:"Bullish",cat:"AI 칩 풀가동, 미국 팹 확장"},
+  {t:"MU",lo:380,hi:480,g:"Cautious",cat:"HBM3E 양산, 사이클 고점 주의"},
+  {t:"CEG",lo:300,hi:400,g:"Moderate",cat:"Calpine 시너지, 전력 장기계약"},
+  {t:"SOXL",lo:45,hi:100,g:"High Risk",cat:"반도체 3배 레버리지"},
+  {t:"IONQ",lo:35,hi:75,g:"Speculative",cat:"매출 가속, SkyWater 인수"},
+  {t:"CRCL",lo:70,hi:140,g:"Recovery",cat:"USDC 확대, 규제 명확화"}
+];
+var EV = [
+  {d:"12/18",t:"MU",e:"Q1 EPS $4.78 (+20.7%)"},{d:"01/07",t:"NVDA",e:"Vera Rubin 공개"},
+  {d:"01/08",t:"CEG",e:"Calpine 인수 $16.4B"},{d:"01/16",t:"TSM",e:"Q4 매출 상회"},
+  {d:"01/27",t:"NVDA",e:"DeepSeek AI 효율성 우려"},{d:"01/30",t:"MU",e:"52주 신고가"},
+  {d:"02/06",t:"CEG",e:"Q4 EPS $2.30"},{d:"02/24",t:"TSM",e:"AMD-Meta 칩 공급"},
+  {d:"02/25",t:"IONQ",e:"Q4 매출 $61.9M (+429%)"},{d:"02/25",t:"CRCL",e:"Q4 EPS +35.5%"},
+  {d:"02/26",t:"NVDA",e:"Q4 $68.1B 상회 (당일 -5.5%)"},{d:"02/26",t:"IONQ",e:"SkyWater 인수 +21.7%"}
+];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+var sel = "NVDA", tab = "signal", ca = 5;
+var ut = {NVDA:250,TSM:420,MU:460,CEG:380,SOXL:85,IONQ:60,CRCL:120};
+var charts = {};
+var TD = {};       // All ticker data: { AAPL: {daily,summary,supply,ts} }
+var isFetching = false;
+var API_DELAY = 13000;
+var DAILY_LIMIT = 25;
+
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+function pf(n,d){return n==null?"—":n.toFixed(d==null?2:d)}
+function pp(n){return(n>=0?"+":"")+(n*100).toFixed(1)+"%"}
+function pc(n){return n>=0?"cg":"cr"}
+function pcs(n){return n>=0?"var(--g)":"var(--r)"}
+function $(id){return document.getElementById(id)}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+function killChart(id){if(charts[id]){try{charts[id].destroy()}catch(e){}delete charts[id]}}
+function hasChart(){return typeof Chart!=="undefined"}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function showErr(msg){var el=$("errArea");el.innerHTML='<div class="errlog">⚠ '+msg+'</div>';setTimeout(function(){el.innerHTML=""},8000)}
+function safeSave(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function safeLoad(k){try{return localStorage.getItem(k)}catch(e){return null}}
+
+function getQuota(){
+  var today=new Date().toISOString().slice(0,10);
+  var d=safeLoad("av_date");
+  if(d!==today){safeSave("av_date",today);safeSave("av_used","0");return 0}
+  return parseInt(safeLoad("av_used")||"0");
+}
+function addQuota(n){safeSave("av_used",String(getQuota()+n))}
+function updateQuotaUI(){var u=getQuota();$("quotaArea").textContent="잔여: "+(DAILY_LIMIT-u)+"/"+DAILY_LIMIT}
+
+function isCachedToday(tk){
+  if(!TD[tk]||!TD[tk].ts)return false;
+  var cd=new Date(TD[tk].ts).toISOString().slice(0,10);
+  return cd===new Date().toISOString().slice(0,10);
+}
+function cacheAge(tk){
+  if(!TD[tk]||!TD[tk].ts)return "미스캔";
+  var h=Math.round((Date.now()-TD[tk].ts)/3600000);
+  if(h<1)return "방금";if(h<24)return h+"시간 전";
+  var d=Math.round(h/24);return d+"일 전";
+}
+
+// Save/Load TD to localStorage
+function saveTD(){
+  try{var s={};for(var k in TD){s[k]={summary:TD[k].summary,supply:TD[k].supply,daily:TD[k].daily,ts:TD[k].ts}}safeSave("td_cache",JSON.stringify(s))}catch(e){}
+}
+function loadTD(){
+  try{var s=safeLoad("td_cache");if(s){var p=JSON.parse(s);for(var k in p)TD[k]=p[k]}}catch(e){}
+}
+
+// ═══════════════════════════════════════════════
+// ALPHA VANTAGE FETCH
+// ═══════════════════════════════════════════════
+function fetchTicker(ticker,apiKey){
+  var url="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+ticker+"&outputsize=compact&apikey="+apiKey;
+  return fetch(url).then(function(r){
+    if(!r.ok)throw new Error(ticker+" HTTP "+r.status);return r.json();
+  }).then(function(json){
+    if(json["Error Message"])throw new Error("잘못된 티커: "+ticker);
+    if(json["Note"])throw new Error("RATE_LIMIT");
+    if(json["Information"])throw new Error("DAILY_LIMIT");
+    var ts=json["Time Series (Daily)"];
+    if(!ts)throw new Error(ticker+": 데이터 없음");
+    var dates=Object.keys(ts).sort(),raw=[];
+    for(var i=0;i<dates.length;i++){var d=ts[dates[i]];raw.push({date:dates[i],d:dates[i].substring(5).replace("-","/"),o:parseFloat(d["1. open"]),h:parseFloat(d["2. high"]),l:parseFloat(d["3. low"]),c:parseFloat(d["4. close"]),v:parseInt(d["5. volume"])})}
+    var days=raw.slice(-65);
+    for(var j=0;j<days.length;j++){
+      var s5=0,c5=0,s20=0,c20=0;
+      for(var k=Math.max(0,j-4);k<=j;k++){s5+=days[k].c;c5++}
+      for(var k2=Math.max(0,j-19);k2<=j;k2++){s20+=days[k2].c;c20++}
+      days[j].ma5=c5>=5?Math.round(s5/c5*100)/100:days[j].c;
+      days[j].ma20=c20>=20?Math.round(s20/c20*100)/100:days[j].c;
+    }
+    var chart20=days.slice(-20).map(function(d){return{d:d.d,c:d.c,a:d.ma5,b:d.ma20}});
+    var last=days[days.length-1],first=days[0];
+    var ret3m=(last.c-first.c)/first.c;
+    var recent5=days.slice(-5),prev20=days.slice(-25,-5);
+    var rA=0,pA=0;
+    for(var r1=0;r1<recent5.length;r1++)rA+=recent5[r1].v;rA/=recent5.length;
+    for(var r2=0;r2<prev20.length;r2++)pA+=prev20[r2].v;pA/=Math.max(prev20.length,1);
+    var vc=pA>0?(rA-pA)/pA:0;
+    var c20d=days.slice(-20),pCh=[],vCh=[];
+    for(var p=1;p<c20d.length;p++){pCh.push((c20d[p].c-c20d[p-1].c)/c20d[p-1].c);vCh.push(c20d[p].v)}
+    var aP=0,aV=0;for(var q=0;q<pCh.length;q++){aP+=pCh[q];aV+=vCh[q]}aP/=pCh.length;aV/=vCh.length;
+    var cv=0,vP=0,vV=0;for(var q2=0;q2<pCh.length;q2++){cv+=(pCh[q2]-aP)*(vCh[q2]-aV);vP+=(pCh[q2]-aP)*(pCh[q2]-aP);vV+=(vCh[q2]-aV)*(vCh[q2]-aV)}
+    var corr=(vP>0&&vV>0)?cv/Math.sqrt(vP*vV):0;
+    var judge;
+    if(vc>0.3&&corr>0.2)judge="강한 매수세";else if(vc>0.1&&corr>0)judge="매수 우위";
+    else if(vc>0.2&&corr<-0.1)judge="강한 매도세";else if(vc>0&&corr<0)judge="매도 우위";else judge="중립";
+    var nm=NAMES[ticker]||(SP5_INFO[ticker]?SP5_INFO[ticker].n:ticker);
+    var sec=PORT_SEC[ticker]||(SP5_INFO[ticker]?SP5_INFO[ticker].sec:"기타");
+    return{daily:chart20,summary:{t:ticker,n:nm,s:sec,p:last.c,r:ret3m,lastDate:last.date},supply:{t:ticker,vc:Math.round(vc*1000)/1000,co:Math.round(corr*1000)/1000,j:judge},ts:Date.now()};
+  });
+}
+
+// ═══════════════════════════════════════════════
+// SMART SCAN ENGINE
+// ═══════════════════════════════════════════════
+function buildQueue(){
+  var q=[];
+  // Phase 1: Portfolio (always refresh)
+  for(var i=0;i<MYPORT.length;i++)q.push({t:MYPORT[i],ph:"포트폴리오"});
+  // Phase 2: Sector ETFs (if not cached today)
+  for(var j=0;j<SETFS.length;j++){
+    if(!isCachedToday(SETFS[j]))q.push({t:SETFS[j],ph:"섹터ETF"});
+  }
+  // Phase 3: S&P 500 stocks (uncached first, then stale)
+  var uncached=[],stale=[];
+  for(var k=0;k<SP5.length;k++){
+    if(!TD[SP5[k]])uncached.push(SP5[k]);
+    else if(!isCachedToday(SP5[k]))stale.push(SP5[k]);
+  }
+  var extras=uncached.concat(stale);
+  for(var m=0;m<extras.length;m++)q.push({t:extras[m],ph:"S&P500"});
+  return q;
+}
+
+function startFullScan(){
+  var apiKey=$("apiKey").value.trim();
+  if(!apiKey){showErr("Alpha Vantage API 키를 입력하세요.");return}
+  if(isFetching)return;
+  isFetching=true;
+
+  var btn=$("btnFetch");btn.disabled=true;btn.textContent="⏳ 스캔 중...";
+  var prog=$("progArea");prog.classList.remove("hide");
+  var fill=$("progFill"),text=$("progText"),pctEl=$("progPct"),status=$("statusArea");
+  $("errArea").innerHTML="";
+  status.innerHTML='<span class="dot dot-load"></span>스캔 진행 중...';
+
+  var queue=buildQueue();
+  var used=getQuota();
+  var maxCalls=DAILY_LIMIT-used;
+  if(maxCalls<=0){showErr("오늘의 API 한도(25회)를 모두 사용했습니다. 내일 다시 시도하세요.");btn.disabled=false;btn.textContent="🔄 전체 스캔";isFetching=false;prog.classList.add("hide");return}
+  var toScan=queue.slice(0,maxCalls);
+  var idx=0,errors=[],scanned=0;
+
+  function doNext(){
+    if(idx>=toScan.length){
+      fill.style.width="100%";pctEl.textContent="100%";
+      var ts=new Date().toLocaleString("ko-KR",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"});
+      if(errors.length>0){text.textContent="일부 오류";status.innerHTML='<span class="dot dot-off"></span>부분 업데이트 · '+ts;showErr(errors.join(" / "))}
+      else{text.textContent="✅ 스캔 완료! ("+scanned+"종목)";status.innerHTML='<span class="dot dot-live"></span>LIVE · '+ts}
+      safeSave("av_key",apiKey);updateQuotaUI();
+      btn.disabled=false;btn.textContent="🔄 전체 스캔";isFetching=false;
+      saveTD();
+      setTimeout(function(){prog.classList.add("hide")},3000);
+      render();return;
+    }
+    var item=toScan[idx];
+    var pv=Math.round((idx/toScan.length)*100);
+    fill.style.width=pv+"%";pctEl.textContent=pv+"%";
+    text.textContent=item.ph+" · "+item.t+" ("+(idx+1)+"/"+toScan.length+")";
+
+    fetchTicker(item.t,apiKey).then(function(data){
+      TD[item.t]=data;scanned++;addQuota(1);updateQuotaUI();
+    }).catch(function(err){
+      if(err.message==="RATE_LIMIT"){text.textContent="⏱ 분당 한도 도달. 20초 대기...";idx--;setTimeout(function(){idx++;doNext()},20000);return}
+      if(err.message==="DAILY_LIMIT"){errors.push("일일 한도 초과");idx=toScan.length;doNext();return}
+      errors.push(item.t+":"+err.message);
+    }).then(function(){
+      idx++;
+      if(idx<toScan.length){
+        var wait=API_DELAY;
+        text.textContent="다음 대기 ("+Math.round(wait/1000)+"초)";
+        setTimeout(doNext,wait);
+      }else{doNext()}
+    });
+  }
+  doNext();
+}
+
+// ═══════════════════════════════════════════════
+// SCORING ENGINE
+// ═══════════════════════════════════════════════
+function scoreOne(tk,isPort){
+  var d=TD[tk];if(!d||!d.daily||d.daily.length<3)return null;
+  var dy=d.daily,sp=d.supply,sm=d.summary;
+  var L=dy[dy.length-1],P=dy[dy.length-2];
+  var p=L.c,m5=L.a,m20=L.b;
+  var gc=m5>m20,dc=m5<m20;var pgc=P.a<=P.b,pdc=P.a>=P.b;
+
+  var tech=0;
+  if(gc&&pgc)tech+=40;else if(gc)tech+=20;
+  if(dc&&pdc)tech-=40;else if(dc)tech-=20;
+  if(p>m5&&p>m20)tech+=20;else if(p<m5&&p<m20)tech-=20;
+  var mom=0;for(var k=dy.length-5;k<dy.length;k++){if(k>0)mom+=(dy[k].c-dy[k-1].c)/dy[k-1].c}
+  tech+=Math.round((mom/5)*500);tech=clamp(tech,-100,100);
+
+  var supS=0;
+  if(sp.j==="강한 매수세")supS=70;else if(sp.j==="매수 우위")supS=40;
+  else if(sp.j==="강한 매도세")supS=-70;else if(sp.j==="매도 우위")supS=-40;
+  supS+=Math.round(sp.vc*20)+Math.round(sp.co*30);supS=clamp(supS,-100,100);
+
+  var evS=0;
+  if(isPort){
+    var evts=[];for(var e=0;e<EV.length;e++){if(EV[e].t===tk)evts.push(EV[e])}evts=evts.slice(-3);
+    for(var e2=0;e2<evts.length;e2++){var txt=evts[e2].e;if(/급등|상회|신고가|인수|확대|공개/.test(txt))evS+=25;else if(/급락|하락|우려|하향/.test(txt))evS-=25;else evS+=10}
+    evS=clamp(evS,-100,100);
+  }
+
+  var comp;
+  if(isPort)comp=Math.round(tech*.4+supS*.35+evS*.25);
+  else comp=Math.round(tech*.55+supS*.45);
+
+  var sig,sigC;
+  if(comp>=50){sig="강력매수";sigC="#00ff88"}else if(comp>=20){sig="매수";sigC="#00d4aa"}
+  else if(comp>=-20){sig="관망";sigC="#fbbf24"}else if(comp>=-50){sig="매도";sigC="#ff4757"}
+  else{sig="강력매도";sigC="#ff0044"}
+
+  var maSt=gc?"골든크로스":dc?"데드크로스":"—";
+  var maC=gc?"var(--g)":dc?"var(--r)":"var(--dim)";
+  var dm5=m5>0?Math.round((p-m5)/m5*1000)/10:0;
+  var dm20=m20>0?Math.round((p-m20)/m20*1000)/10:0;
+
+  return{t:tk,n:sm.n,s:sm.s,p:sm.p,r:sm.r,tech:tech,sup:supS,ev:evS,comp:comp,sig:sig,sigC:sigC,maSt:maSt,maC:maC,dm5:dm5,dm20:dm20,supJ:sp.j,vc:sp.vc,co:sp.co,fc:null,ts:d.ts};
+}
+
+function calcPortSigs(){
+  var out=[];
+  for(var i=0;i<MYPORT.length;i++){
+    var s=scoreOne(MYPORT[i],true);
+    if(!s){out.push({t:MYPORT[i],n:NAMES[MYPORT[i]]||MYPORT[i],s:PORT_SEC[MYPORT[i]]||"",noData:true});continue}
+    for(var fi=0;fi<FC.length;fi++){if(FC[fi].t===s.t){s.fc=FC[fi];break}}
+    out.push(s);
+  }
+  return out;
+}
+
+function calcAllSP5Sigs(){
+  var all=[];
+  // Include portfolio stocks that are in S&P 500
+  var sp500tickers=["NVDA","TSM","MU","CEG"];
+  for(var i=0;i<sp500tickers.length;i++){
+    var s=scoreOne(sp500tickers[i],false);
+    if(s){s.inPort=true;all.push(s)}
+  }
+  // S&P 500 candidates
+  for(var j=0;j<SP5.length;j++){
+    var s2=scoreOne(SP5[j],false);
+    if(s2){s2.inPort=false;all.push(s2)}
+  }
+  all.sort(function(a,b){return b.comp-a.comp});
+  return all;
+}
+
+function calcSectorSigs(){
+  var out=[];
+  for(var i=0;i<SMAP.length;i++){
+    var sm=SMAP[i],etf=sm.etf;
+    var s=scoreOne(etf,false);
+    var stockScores=[];
+    for(var j=0;j<sm.st.length;j++){
+      var ss=scoreOne(sm.st[j],false);
+      if(ss)stockScores.push(ss);
+    }
+    out.push({id:sm.id,nm:sm.nm,etf:etf,co:sm.co,score:s,stocks:stockScores,stockTickers:sm.st});
+  }
+  out.sort(function(a,b){
+    var sa=a.score?a.score.comp:-999,sb=b.score?b.score.comp:-999;
+    return sb-sa;
+  });
+  return out;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER HELPERS
+// ═══════════════════════════════════════════════
+function sbH(label,val){
+  var w=Math.abs(val)/2;var col=val>20?"var(--g)":val<-20?"var(--r)":"var(--a)";
+  return'<div class="sb"><div class="tp"><span>'+label+'</span><span style="color:'+col+';font-weight:700">'+(val>0?"+":"")+val+'</span></div><div class="br"><div class="fl" style="'+(val>=0?"left":"right")+':50%;width:'+w+'%;background:'+(val>=0?"var(--g)":"var(--r)")+'"></div><div class="cn"></div></div></div>';
+}
+
+function hasAny(){for(var k in TD){if(TD[k]&&TD[k].daily)return true}return false}
+function hasPort(){for(var i=0;i<MYPORT.length;i++){if(TD[MYPORT[i]])return true}return false}
+function noDataMsg(msg){return'<div class="cd" style="text-align:center;padding:30px"><div style="font-size:28px;margin-bottom:10px">📡</div><div style="font-size:12px;font-weight:700;margin-bottom:6px">'+msg+'</div><div style="font-size:9px;color:var(--dim);line-height:1.7">① API 키 입력 → "🔄 전체 스캔" 클릭<br>② 포트폴리오(7) → 섹터ETF(11) → S&P500 순차 스캔<br><a href="https://www.alphavantage.co/support/#api-key" target="_blank" style="color:var(--b)">▸ 무료 API 키 발급</a></div></div>'}
+
+// ═══════════════════════════════════════════════
+// TAB 1: SIGNAL (Portfolio)
+// ═══════════════════════════════════════════════
+function rSignal(){
+  if(!hasPort()){$("pSignal").innerHTML=noDataMsg("데이터를 업데이트하세요");return}
+  var sigs=calcPortSigs();
+  var cs=null;for(var i=0;i<sigs.length;i++){if(sigs[i].t===sel){cs=sigs[i];break}}
+  if(!cs||cs.noData){$("pSignal").innerHTML=noDataMsg(sel+" 데이터 없음");return}
+
+  var sjC=cs.supJ.indexOf("매수")>=0?"var(--g)":cs.supJ.indexOf("매도")>=0?"var(--r)":"var(--a)";
+  var fcL=cs.fc?cs.fc.lo:0,fcH=cs.fc?cs.fc.hi:0;
+  var tCol=TC[sel]||"var(--b)";
+
+  var h='<div class="cd"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:4px"><div><span style="font-size:14px;font-weight:900;color:'+tCol+'">'+cs.t+'</span><span style="font-size:9px;color:var(--dim);margin-left:5px">'+cs.n+'</span><div style="font-size:8px;color:var(--dim);margin-top:1px">'+cs.s+'</div></div><div style="text-align:right"><div style="font-size:18px;font-weight:900">$'+pf(cs.p)+'</div><div style="font-size:9px;color:'+pcs(cs.r)+'">'+pp(cs.r)+' (3M)</div></div></div>';
+  h+='<div class="cc"><canvas id="cPrice"></canvas></div>';
+  h+='<div class="lg"><span><i style="background:'+tCol+'"></i>종가</span><span><i style="background:#ff6b35"></i>MA5</span><span><i style="background:#4ecdc4"></i>MA20</span></div>';
+  h+='<div class="g2" style="margin-top:10px"><div><div style="font-size:8px;color:var(--dim);margin-bottom:4px;font-weight:700">◎ 지표</div>'+sbH("기술 40%",cs.tech)+sbH("수급 35%",cs.sup)+sbH("이벤트 25%",cs.ev)+'<div style="height:1px;background:var(--bdr);margin:4px 0"></div>'+sbH("종합",cs.comp)+'</div>';
+  h+='<div><div style="font-size:8px;color:var(--dim);margin-bottom:4px;font-weight:700">◎ 상세</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px"><div class="bx"><div class="lb">이동평균</div><div class="vl" style="color:'+cs.maC+'">'+cs.maSt+'</div></div><div class="bx"><div class="lb">수급</div><div class="vl" style="color:'+sjC+';font-size:9px">'+cs.supJ+'</div></div><div class="bx"><div class="lb">MA5 이격</div><div class="vl" style="color:'+pcs(cs.dm5/100)+'">'+(cs.dm5>0?"+":"")+cs.dm5+'%</div></div><div class="bx"><div class="lb">MA20 이격</div><div class="vl" style="color:'+pcs(cs.dm20/100)+'">'+(cs.dm20>0?"+":"")+cs.dm20+'%</div></div><div class="bx"><div class="lb">거래량</div><div class="vl" style="color:'+pcs(cs.vc)+'">'+pp(cs.vc)+'</div></div><div class="bx"><div class="lb">컨센서스</div><div class="vl cb" style="font-size:8px">$'+fcL+'~$'+fcH+'</div></div></div></div></div>';
+  h+='<div class="sg" style="border:1px solid '+cs.sigC+'33"><div style="font-size:8px;color:var(--dim)">종합 매매 시그널</div><div class="nm" style="color:'+cs.sigC+'">'+cs.sig+'</div><div class="ds">기술 '+(cs.tech>0?"+":"")+cs.tech+' · 수급 '+(cs.sup>0?"+":"")+cs.sup+' · 이벤트 '+(cs.ev>0?"+":"")+cs.ev+' → 종합 '+(cs.comp>0?"+":"")+cs.comp+'</div></div></div>';
+
+  // Portfolio signal table
+  h+='<div class="cd"><div class="ct">◎ 전체 포트폴리오</div><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>종목</th><th>현재가</th><th>3M</th><th>MA</th><th>수급</th><th>기술</th><th>수급</th><th>이벤트</th><th>종합</th><th>시그널</th></tr></thead><tbody id="sigTb"></tbody></table></div></div>';
+  $("pSignal").innerHTML=h;
+
+  var tbody=$("sigTb");
+  for(var si=0;si<sigs.length;si++){
+    if(sigs[si].noData)continue;var x=sigs[si];
+    var sjC2=x.supJ.indexOf("매수")>=0?"cg":x.supJ.indexOf("매도")>=0?"cr":"ca";
+    var row=document.createElement("tr");row.className="ck";
+    if(x.t===sel)row.style.background=(TC[x.t]||"#3b82f6")+"11";
+    row.innerHTML='<td style="font-weight:700;color:'+(TC[x.t]||"var(--b)")+'">'+x.t+'</td><td>$'+pf(x.p)+'</td><td class="'+pc(x.r)+'" style="font-weight:700">'+pp(x.r)+'</td><td style="color:'+x.maC+';font-size:7px">'+x.maSt+'</td><td class="'+sjC2+'" style="font-size:7px">'+x.supJ+'</td><td class="'+pc(x.tech/100)+'">'+(x.tech>0?"+":"")+x.tech+'</td><td class="'+pc(x.sup/100)+'">'+(x.sup>0?"+":"")+x.sup+'</td><td class="'+pc(x.ev/100)+'">'+(x.ev>0?"+":"")+x.ev+'</td><td style="font-weight:800;color:'+x.sigC+'">'+(x.comp>0?"+":"")+x.comp+'</td><td><span class="pl" style="background:'+x.sigC+'22;color:'+x.sigC+'">'+x.sig+'</span></td>';
+    (function(tk){row.addEventListener("click",function(){sel=tk;render()})})(x.t);
+    tbody.appendChild(row);
+  }
+
+  // Chart
+  killChart("price");
+  var dy=TD[sel]?TD[sel].daily:[];
+  var cv=$("cPrice");
+  if(cv&&dy.length>0&&hasChart()){
+    charts.price=new Chart(cv,{type:"line",data:{labels:dy.map(function(x){return x.d}),datasets:[{label:"종가",data:dy.map(function(x){return x.c}),borderColor:tCol,backgroundColor:tCol+"22",fill:true,tension:.3,pointRadius:0,borderWidth:2},{label:"MA5",data:dy.map(function(x){return x.a}),borderColor:"#ff6b35",borderDash:[4,2],pointRadius:0,borderWidth:1,fill:false},{label:"MA20",data:dy.map(function(x){return x.b}),borderColor:"#4ecdc4",borderDash:[4,2],pointRadius:0,borderWidth:1,fill:false}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:300},plugins:{legend:{display:false},tooltip:{mode:"index",intersect:false,backgroundColor:"#1e293b",titleColor:"#e2e8f0",bodyColor:"#e2e8f0"}},scales:{x:{ticks:{color:"#64748b",font:{size:7}},grid:{color:"#1e293b22"}},y:{ticks:{color:"#64748b",font:{size:7}},grid:{color:"#1e293b22"}}}}});
+  }else if(cv&&dy.length>0){cv.parentElement.innerHTML='<div style="text-align:center;padding:20px;color:var(--dim);font-size:11px">📊 차트 로딩 중...</div>'}
+}
+
+// ═══════════════════════════════════════════════
+// TAB 2: TARGET
+// ═══════════════════════════════════════════════
+function rTarget(){
+  if(!hasPort()){$("pTarget").innerHTML=noDataMsg("포트폴리오 데이터 필요");return}
+  var h='<div class="cd"><div class="ct">◎ 목표가 설정 <span style="font-size:7px;color:var(--dim);font-weight:400">애널리스트 컨센서스 기반 · 목표가 입력 → 실시간 수익률</span></div>';
+  for(var i=0;i<FC.length;i++){
+    var f=FC[i],cp=f.cp||(TD[f.t]?TD[f.t].summary.p:0);
+    var u=ut[f.t]||0;var up=u>0&&cp>0?(u-cp)/cp:0;
+    var lo=cp>0?(f.lo-cp)/cp:0,hi=cp>0?(f.hi-cp)/cp:0;
+    var retPct=u>0&&cp>0?((u-cp)/cp*100).toFixed(1):"0";
+    var retC=u>0&&cp>0?pcs(up):"var(--dim)";
+    var barPct=u>0&&cp>0?Math.min(Math.abs(up)*200,100):0;
+    var barL=up>=0?"left:50%":"right:50%";var barBg=up>=0?"var(--g)":"var(--r)";
+    h+='<div class="tr">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px"><div><span style="font-weight:900;color:'+(TC[f.t]||"var(--b)")+';font-size:13px">'+f.t+'</span><span style="font-size:8px;color:var(--dim);margin-left:4px">'+f.g+'</span><span style="margin-left:5px;font-weight:600">$'+pf(cp,1)+'</span></div></div>';
+    if(f.at_avg>0&&f.at_n>0){var atRet=cp>0?((f.at_avg-cp)/cp*100).toFixed(1):"0";var atC=f.at_avg>=cp?"var(--g)":"var(--r)";h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);border-radius:8px;margin-top:6px;flex-wrap:wrap"><span style="font-size:9px;color:var(--b)">🏦 월가 컨센서스</span><span style="font-size:14px;font-weight:900;color:var(--b)">$'+pf(f.at_avg,0)+'</span><span style="font-size:11px;font-weight:700;color:'+atC+'">'+(f.at_avg>=cp?"+":"")+atRet+'%</span><span style="font-size:8px;color:var(--dim);margin-left:auto">'+f.at_n+'명 애널리스트</span></div>';}
+    h+='<div class="tgt-wrap"><span style="font-size:9px;color:var(--dim);white-space:nowrap">🎯 내 목표가 $</span><input class="tgt-input" type="number" value="'+(u||"")+'" data-tk="'+f.t+'" placeholder="입력"><span style="font-size:9px;color:var(--dim)">→</span><span class="tgt-ret" style="color:'+retC+'">'+(u>0?(up>=0?"+":"")+retPct+"%":"입력 대기")+'</span></div>';
+    h+='<div class="tgt-bar"><div class="tgt-fill" style="width:'+barPct+'%;'+barL+';background:'+barBg+'"></div></div>';
+    h+='<div style="font-size:8px;display:flex;gap:10px;flex-wrap:wrap;margin-top:5px"><span class="cr">▼ 최저목표 $'+f.lo+' ('+pp(lo)+')</span><span class="cg">▲ 최고목표 $'+f.hi+' ('+pp(hi)+')</span><span style="color:var(--dim)">'+f.cat+'</span></div></div>';
+  }
+  h+='</div>';
+
+  // Simulation
+  var avgLo=0,avgMid=0,avgHi=0,cnt=0;
+  for(var k=0;k<FC.length;k++){var fk=FC[k],cp2=fk.cp||(TD[fk.t]?TD[fk.t].summary.p:0);if(cp2>0){avgLo+=(fk.lo-cp2)/cp2;avgHi+=(fk.hi-cp2)/cp2;avgMid+=((fk.lo+fk.hi)/2-cp2)/cp2;cnt++}}
+  if(cnt>0){avgLo/=cnt;avgMid/=cnt;avgHi/=cnt}
+  h+='<div class="cd"><div class="ct">◎ ₩3.4억 시뮬레이션</div><div class="g3"><div class="bx" style="text-align:center;padding:6px"><div style="font-size:7px;color:var(--dim)">보수적</div><div style="font-size:13px;font-weight:900;margin-top:2px;color:var(--r)">'+pp(avgLo)+'</div><div style="font-size:7px;color:var(--dim)">₩'+Math.round(340000000*(1+avgLo)/10000).toLocaleString()+'만</div></div><div class="bx" style="text-align:center;padding:6px"><div style="font-size:7px;color:var(--dim)">컨센서스</div><div style="font-size:13px;font-weight:900;margin-top:2px;color:var(--a)">'+pp(avgMid)+'</div><div style="font-size:7px;color:var(--dim)">₩'+Math.round(340000000*(1+avgMid)/10000).toLocaleString()+'만</div></div><div class="bx" style="text-align:center;padding:6px"><div style="font-size:7px;color:var(--dim)">낙관적</div><div style="font-size:13px;font-weight:900;margin-top:2px;color:var(--g)">'+pp(avgHi)+'</div><div style="font-size:7px;color:var(--dim)">₩'+Math.round(340000000*(1+avgHi)/10000).toLocaleString()+'만</div></div></div></div>';
+  $("pTarget").innerHTML=h;
+  var inputs=document.querySelectorAll(".tgt-input[data-tk]");
+  for(var ii=0;ii<inputs.length;ii++){inputs[ii].addEventListener("input",function(){ut[this.getAttribute("data-tk")]=Number(this.value);rTarget()})}
+}
+
+// ═══════════════════════════════════════════════
+// TAB 3: PORTFOLIO
+// ═══════════════════════════════════════════════
+function rPort(){
+  if(!hasPort()){$("pPort").innerHTML=noDataMsg("포트폴리오 데이터 필요");return}
+  var sigs=calcPortSigs();
+  var h='<div class="cd"><div class="ct">◎ 자산 배분</div><div class="ag">';
+  for(var j=0;j<MYPORT.length;j++){
+    var t=MYPORT[j];var sig=null;for(var k=0;k<sigs.length;k++){if(sigs[k].t===t&&!sigs[k].noData){sig=sigs[k];break}}
+    if(!sig)continue;var adj=(ALLOC_W[t]*(100-ca)/100).toFixed(1);
+    h+='<div class="ai" style="border:1px solid '+(TC[t]||"var(--bdr)")+'44"><div style="display:flex;justify-content:space-between"><span style="font-weight:800;color:'+(TC[t]||"var(--b)")+';font-size:10px">'+t+'</span><span style="font-size:8px;color:var(--dim)">'+adj+'%</span></div><div style="font-size:7px;color:var(--dim);margin-top:1px">'+sig.s+'</div><div class="ab"><div class="af" style="width:'+adj+'%;background:'+(TC[t]||"var(--b)")+'"></div></div><div style="display:flex;justify-content:space-between;margin-top:3px;font-size:8px"><span style="color:'+sig.sigC+'">'+sig.sig+'</span><span class="'+pc(sig.r)+'">'+pp(sig.r)+'</span></div></div>';
+  }
+  h+='<div class="ai" style="border:1px dashed rgba(251,191,36,.3)"><div style="display:flex;justify-content:space-between"><span style="font-weight:800;color:var(--a);font-size:10px">₿ CRYPTO</span><span style="font-size:8px;color:var(--a)">'+ca+'%</span></div><div style="font-size:7px;color:var(--dim)">BTC + XRP</div><div style="margin-top:4px"><input type="range" min="0" max="15" value="'+ca+'" id="cryptoSlider"></div><div style="font-size:8px;color:var(--a);margin-top:1px">≈₩'+Math.round(340000000*ca/100/10000).toLocaleString()+'만</div></div>';
+  h+='</div></div>';
+  h+='<div class="cd warn"><div class="ct" style="color:var(--r)">⚠ 집중도 경고</div><div style="font-size:9px;line-height:1.7">🔴 <b>반도체 73%</b> — SOXL 3x 레버리지로 섹터 -10%시 포트 -12~15%<br>🟡 <b>방어자산 0%</b> — 채권/금 10~15% 편입 권고<br>🟡 <b>SOXL 디케이</b> — 3x 장기보유시 구조적 손실</div></div>';
+  h+='<div class="cd"><div class="ct">◎ 이벤트</div><div class="el">';
+  for(var m=EV.length-1;m>=0;m--)h+='<div class="er"><span style="color:var(--dim);white-space:nowrap;font-size:8px">'+EV[m].d+'</span><span style="font-weight:700;color:'+(TC[EV[m].t]||"var(--b)")+';min-width:32px;font-size:9px">'+EV[m].t+'</span><span style="flex:1">'+EV[m].e+'</span></div>';
+  h+='</div></div>';
+  $("pPort").innerHTML=h;
+  var slider=$("cryptoSlider");
+  if(slider)slider.addEventListener("input",function(){ca=Number(this.value);rPort()});
+}
+
+// ═══════════════════════════════════════════════
+// TAB 4: RECOMMENDED STOCKS (S&P 500)
+// ═══════════════════════════════════════════════
+function betaBadge(tk){
+  if(typeof BETA_MAP==="undefined"||!BETA_MAP[tk])return'<span class="beta-badge" style="background:#475569;color:#94a3b8">β —</span>';
+  var b=BETA_MAP[tk];
+  var bg,fg;
+  if(b<0.8){bg="rgba(59,130,246,.2)";fg="#60a5fa"}       // 방어적 (blue)
+  else if(b<=1.2){bg="rgba(0,212,170,.2)";fg="#00d4aa"}   // 중립 (green)
+  else if(b<=1.5){bg="rgba(251,191,36,.2)";fg="#fbbf24"}  // 보통 (yellow)
+  else{bg="rgba(255,71,87,.2)";fg="#ff4757"}              // 고위험 (red)
+  return'<span class="beta-badge" style="background:'+bg+';color:'+fg+'">β '+b.toFixed(2)+'</span>';
+}
+
+function rRec(){
+  var all=calcAllSP5Sigs();
+  var scanned=all.length,total=SP5.length+4;
+  var strong=0,buy=0,hold=0,sellN=0;
+  for(var c=0;c<all.length;c++){if(all[c].sig==="강력매수")strong++;else if(all[c].sig==="매수")buy++;else if(all[c].sig==="관망")hold++;else sellN++}
+
+  if(scanned===0){$("pRec").innerHTML=noDataMsg("S&P 500 스캔이 필요합니다");return}
+
+  var h='<div class="cd"><div class="ct">◎ S&P 500 스캔 현황</div>';
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">';
+  h+='<div class="bx" style="flex:1;min-width:60px;text-align:center"><div class="lb">스캔 완료</div><div class="vl cb">'+scanned+'/'+total+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:60px;text-align:center"><div class="lb">강력매수</div><div class="vl" style="color:#00ff88">'+strong+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:60px;text-align:center"><div class="lb">매수</div><div class="vl cg">'+buy+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:60px;text-align:center"><div class="lb">관망</div><div class="vl ca">'+hold+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:60px;text-align:center"><div class="lb">매도</div><div class="vl cr">'+sellN+'</div></div>';
+  h+='</div>';
+  if(scanned<total)h+='<div style="font-size:8px;color:var(--a);margin-bottom:6px">💡 Free tier(25/일) 한도로 매일 스캔 시 '+(Math.ceil((total-scanned)/18))+'일 추가 필요. 스캔된 종목만 표시됩니다.</div>';
+  h+='</div>';
+
+  // TOP 10
+  var top10=all.slice(0,10);
+  h+='<div class="cd"><div class="ct">🏆 TOP 10 추천종목 <span style="font-size:7px;color:var(--dim);font-weight:400">기술55% + 수급45% 종합점수 기준</span></div>';
+  h+='<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>종목</th><th>섹터</th><th>현재가</th><th>3M</th><th>MA</th><th>수급</th><th>기술</th><th>수급</th><th>종합</th><th>Beta</th><th>시그널</th></tr></thead><tbody>';
+  for(var i=0;i<top10.length;i++){
+    var x=top10[i];
+    var rankBg=i<3?"var(--g)":i<7?"var(--b)":"var(--dim)";
+    var sjC=x.supJ.indexOf("매수")>=0?"cg":x.supJ.indexOf("매도")>=0?"cr":"ca";
+    var portBadge=x.inPort?'<span class="badge" style="background:var(--a);color:#000;margin-left:2px">MY</span>':"";
+    h+='<tr><td><span class="rank-num" style="background:'+rankBg+'">'+(i+1)+'</span></td><td style="font-weight:700;text-align:left">'+x.t+portBadge+'<div style="font-size:7px;color:var(--dim);font-weight:400">'+x.n+'</div></td><td style="font-size:7px">'+x.s+'</td><td>$'+pf(x.p)+'</td><td class="'+pc(x.r)+'" style="font-weight:700">'+pp(x.r)+'</td><td style="color:'+x.maC+';font-size:7px">'+x.maSt+'</td><td class="'+sjC+'" style="font-size:7px">'+x.supJ+'</td><td class="'+pc(x.tech/100)+'">'+(x.tech>0?"+":"")+x.tech+'</td><td class="'+pc(x.sup/100)+'">'+(x.sup>0?"+":"")+x.sup+'</td><td style="font-weight:900;color:'+x.sigC+';font-size:11px">'+(x.comp>0?"+":"")+x.comp+'</td><td>'+betaBadge(x.t)+'</td><td><span class="pl" style="background:'+x.sigC+'22;color:'+x.sigC+';border:1px solid '+x.sigC+'44">'+x.sig+'</span></td></tr>';
+  }
+  h+='</tbody></table></div></div>';
+
+  // Full list
+  if(all.length>10){
+    h+='<div class="cd"><div class="ct">◎ 전체 스캔 결과 ('+all.length+'종목)</div><div style="overflow-x:auto;max-height:300px;overflow-y:auto"><table class="tbl"><thead><tr><th>#</th><th>종목</th><th>섹터</th><th>가격</th><th>3M</th><th>기술</th><th>수급</th><th>종합</th><th>Beta</th><th>시그널</th></tr></thead><tbody>';
+    for(var j=0;j<all.length;j++){
+      var y=all[j];
+      h+='<tr><td style="color:var(--dim)">'+(j+1)+'</td><td style="font-weight:600;font-size:8px">'+y.t+(y.inPort?'<span style="color:var(--a)">★</span>':"")+'</td><td style="font-size:7px;color:var(--dim)">'+y.s+'</td><td>$'+pf(y.p,1)+'</td><td class="'+pc(y.r)+'">'+pp(y.r)+'</td><td class="'+pc(y.tech/100)+'">'+(y.tech>0?"+":"")+y.tech+'</td><td class="'+pc(y.sup/100)+'">'+(y.sup>0?"+":"")+y.sup+'</td><td style="font-weight:800;color:'+y.sigC+'">'+(y.comp>0?"+":"")+y.comp+'</td><td>'+betaBadge(y.t)+'</td><td><span class="pl" style="background:'+y.sigC+'22;color:'+y.sigC+'">'+y.sig+'</span></td></tr>';
+    }
+    h+='</tbody></table></div></div>';
+  }
+
+  // Unscanned
+  var unscanned=[];
+  for(var u=0;u<SP5.length;u++){if(!TD[SP5[u]])unscanned.push(SP5[u])}
+  if(unscanned.length>0){
+    h+='<div class="cd"><div class="ct" style="color:var(--dim)">◎ 미스캔 종목 ('+unscanned.length+'개)</div><div style="font-size:8px;color:var(--dim);line-height:1.6">';
+    for(var uk=0;uk<unscanned.length;uk++){
+      h+='<span style="display:inline-block;padding:1px 5px;border:1px dashed var(--bdr);border-radius:3px;margin:1px">'+unscanned[uk]+'</span>';
+    }
+    h+='</div></div>';
+  }
+
+  $("pRec").innerHTML=h;
+}
+
+// ═══════════════════════════════════════════════
+// TAB 5: SECTOR ROTATION
+// ═══════════════════════════════════════════════
+function rSector(){
+  var sectors=calcSectorSigs();
+  var anyData=false;for(var c=0;c<sectors.length;c++){if(sectors[c].score)anyData=true}
+  if(!anyData){$("pSector").innerHTML=noDataMsg("섹터 ETF 스캔이 필요합니다");return}
+
+  // 최대값 계산 (바 정규화용)
+  var maxComp=1;for(var mi=0;mi<sectors.length;mi++){if(sectors[mi].score)maxComp=Math.max(maxComp,Math.abs(sectors[mi].score.comp))}
+
+  var h='<div class="cd"><div class="ct">◎ GICS 11섹터 순환매 분석 <span style="font-size:7px;color:var(--dim);font-weight:400">SPDR Sector ETFs 기준</span></div>';
+  h+='<div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap">';
+  h+='<div class="bx" style="flex:1;min-width:70px;text-align:center"><div class="lb">🔥 과열</div><div class="vl" style="color:#00ff88">'+sectors.filter(function(s){return s.score&&s.score.comp>=50}).length+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:70px;text-align:center"><div class="lb">↗ 유입</div><div class="vl cg">'+sectors.filter(function(s){return s.score&&s.score.comp>=20&&s.score.comp<50}).length+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:70px;text-align:center"><div class="lb">↔ 중립</div><div class="vl ca">'+sectors.filter(function(s){return s.score&&s.score.comp>-20&&s.score.comp<20}).length+'</div></div>';
+  h+='<div class="bx" style="flex:1;min-width:70px;text-align:center"><div class="lb">↘ 유출</div><div class="vl cr">'+sectors.filter(function(s){return s.score&&s.score.comp<=-20}).length+'</div></div>';
+  h+='</div></div>';
+
+  // ─── 히트맵 그리드 ───
+  h+='<div class="cd"><div class="ct">◎ 섹터 히트맵 <span style="font-size:7px;color:var(--dim);font-weight:400">종합점수 기반 색상 강도</span></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px">';
+  for(var hi=0;hi<sectors.length;hi++){
+    var hsc=sectors[hi];if(!hsc.score)continue;
+    var hv=hsc.score.comp;
+    var hOp=Math.max(0.4,Math.abs(hv)/maxComp);
+    var hBg=hv>=0?"rgba(0,212,170,"+hOp+")":"rgba(255,71,87,"+hOp+")";
+    h+='<div class="hm-cell" style="background:'+hBg+'"><div class="hm-nm">'+hsc.nm+'</div><div class="hm-val">'+(hv>0?"+":"")+hv+'</div><div class="hm-etf">'+hsc.etf+' '+pp(hsc.score.r)+'</div></div>';
+  }
+  h+='</div></div>';
+
+  // ─── 섹터 강도 랭킹 (가로 막대 그래프 포함) ───
+  h+='<div class="cd"><div class="ct">◎ 섹터 강도 랭킹</div>';
+  for(var i=0;i<sectors.length;i++){
+    var sc=sectors[i],s=sc.score;
+    if(!s)continue;
+    var badge,badgeC;
+    if(s.comp>=50){badge="🔥 과열";badgeC="#00ff88"}
+    else if(s.comp>=20){badge="↗ 유입";badgeC="var(--g)"}
+    else if(s.comp>=-20){badge="↔ 중립";badgeC="var(--a)"}
+    else if(s.comp>=-50){badge="↘ 유출";badgeC="var(--r)"}
+    else{badge="❄ 침체";badgeC="#ff0044"}
+    var barW=Math.abs(s.comp)/2;var barC=s.comp>=0?"var(--g)":"var(--r)";
+
+    h+='<div class="sec-card" style="border-left-color:'+sc.co+';margin-bottom:6px"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:3px"><div><span style="font-weight:900;color:'+sc.co+';font-size:11px">'+(i+1)+'. '+sc.nm+'</span><span style="font-size:8px;color:var(--dim);margin-left:4px">'+sc.etf+' $'+pf(s.p,1)+'</span></div><div style="display:flex;gap:6px;align-items:center"><span style="font-size:9px;font-weight:700;color:'+pcs(s.r)+'">'+pp(s.r)+'</span><span style="font-size:8px;font-weight:800;color:'+badgeC+'">'+badge+'</span></div></div>';
+
+    // ─── 가로 막대 그래프 (기술/수급/종합) ───
+    var techW=Math.abs(s.tech);var techC=s.tech>=0?"var(--g)":"var(--r)";
+    var supW=Math.abs(s.sup);var supC=s.sup>=0?"var(--g)":"var(--r)";
+    var compW=Math.abs(s.comp);var compC=s.comp>=0?"var(--g)":"var(--r)";
+    h+='<div style="margin-top:5px">';
+    h+='<div class="metric-bar"><span class="mb-label">기술</span><div class="mb-track"><div class="mb-fill" style="width:'+techW+'%;background:'+techC+'"></div></div><span class="mb-val" style="color:'+techC+'">'+(s.tech>0?"+":"")+s.tech+'</span></div>';
+    h+='<div class="metric-bar"><span class="mb-label">수급</span><div class="mb-track"><div class="mb-fill" style="width:'+supW+'%;background:'+supC+'"></div></div><span class="mb-val" style="color:'+supC+'">'+(s.sup>0?"+":"")+s.sup+'</span></div>';
+    h+='<div class="metric-bar"><span class="mb-label">종합</span><div class="mb-track"><div class="mb-fill" style="width:'+compW+'%;background:'+compC+'"></div></div><span class="mb-val" style="color:'+compC+';font-weight:900">'+(s.comp>0?"+":"")+s.comp+'</span></div>';
+    h+='</div>';
+
+    h+='<div class="sec-bar"><div class="sec-fill" style="width:'+barW+'%;background:'+barC+';margin-'+(s.comp>=0?"left:50%":"right:50%")+'"></div></div>';
+
+    // Sector stocks
+    if(sc.stocks.length>0){
+      h+='<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">';
+      for(var j=0;j<sc.stocks.length;j++){
+        var st=sc.stocks[j];
+        h+='<span style="font-size:7px;padding:2px 5px;border-radius:3px;background:'+st.sigC+'15;color:'+st.sigC+';border:1px solid '+st.sigC+'33">'+st.t+' '+(st.comp>0?"+":"")+st.comp+'</span>';
+      }
+      h+='</div>';
+    } else if(sc.stockTickers.length>0){
+      h+='<div style="margin-top:4px;font-size:7px;color:var(--dim)">소속: '+sc.stockTickers.join(", ")+'</div>';
+    }
+    h+='</div>';
+  }
+  h+='</div>';
+
+  // Sector bar chart (Chart.js)
+  h+='<div class="cd"><div class="ct">◎ 섹터 종합점수 차트</div><div class="cc" style="height:180px"><canvas id="cSector"></canvas></div></div>';
+
+  // Rotation cycle reference
+  h+='<div class="cd"><div class="ct">◎ 경기 순환 참고</div><div style="font-size:8px;line-height:1.8;color:var(--dim)">';
+  h+='<div style="margin-bottom:3px"><span style="color:var(--g)">▸ 회복기 (Early)</span> — 금융, 경기소비재, 산업재</div>';
+  h+='<div style="margin-bottom:3px"><span style="color:var(--b)">▸ 확장기 (Mid)</span> — 정보기술, 커뮤니케이션, 소재</div>';
+  h+='<div style="margin-bottom:3px"><span style="color:var(--a)">▸ 후기 (Late)</span> — 에너지, 필수소비재, 헬스케어</div>';
+  h+='<div><span style="color:var(--r)">▸ 침체기 (Recession)</span> — 유틸리티, 헬스케어, 필수소비재</div>';
+  h+='</div></div>';
+
+  $("pSector").innerHTML=h;
+
+  // Sector chart
+  killChart("sector");
+  setTimeout(function(){
+    var cv=$("cSector");if(!cv)return;
+    var labels=[],data=[],colors=[],borderColors=[];
+    for(var k=0;k<sectors.length;k++){
+      if(!sectors[k].score)continue;
+      labels.push(sectors[k].nm);
+      data.push(sectors[k].score.comp);
+      var c=sectors[k].score.comp>=0?"rgba(0,212,170,0.6)":"rgba(255,71,87,0.6)";
+      var bc=sectors[k].score.comp>=0?"rgba(0,212,170,1)":"rgba(255,71,87,1)";
+      colors.push(c);borderColors.push(bc);
+    }
+    if(hasChart()){charts.sector=new Chart(cv,{type:"bar",data:{labels:labels,datasets:[{label:"종합점수",data:data,backgroundColor:colors,borderColor:borderColors,borderWidth:1,borderRadius:3}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,animation:{duration:300},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return"종합: "+(ctx.raw>0?"+":"")+ctx.raw}}}},scales:{x:{ticks:{color:"#64748b",font:{size:7}},grid:{color:"#1e293b22"},min:-100,max:100},y:{ticks:{color:"#94a3b8",font:{size:8,weight:"bold"}},grid:{display:false}}}}});}
+  },100);
+}
+
+// ═══════════════════════════════════════════════
+// MAIN RENDER
+// ═══════════════════════════════════════════════
+function rHdr(){
+  var avg=0,cnt=0;
+  for(var i=0;i<MYPORT.length;i++){if(TD[MYPORT[i]]&&TD[MYPORT[i]].summary){avg+=TD[MYPORT[i]].summary.r;cnt++}}
+  avg=cnt>0?avg/cnt:0;
+  var h=$("hAvg");h.textContent=cnt>0?pp(avg):"—";h.className="vl "+pc(avg);
+  var sub="7 Holdings · S&P 500";
+  var portD=TD[MYPORT[0]];
+  if(portD&&portD.summary)sub+=" · "+portD.summary.lastDate;
+  $("hSub").textContent=sub;
+}
+
+function rStrip(){
+  var el=$("strip");el.innerHTML="";
+  for(var i=0;i<MYPORT.length;i++){
+    (function(t){
+      var b=document.createElement("button");
+      var d=TD[t];var p=d?d.summary.p:0;var r=d?d.summary.r:0;
+      var col=TC[t]||"var(--b)";
+      if(t===sel){b.className="on";b.style.borderColor=col;var rgb=parseInt(col.slice(1,3),16)+","+parseInt(col.slice(3,5),16)+","+parseInt(col.slice(5,7),16);b.style.background="rgba("+rgb+",.1)";b.style.color=col}
+      var rT=d?pp(r):"—";var rC=d?pcs(r):"var(--dim)";
+      b.innerHTML="<div style='font-weight:700;color:"+(t===sel?col:"inherit")+"'>"+t+"</div><div style='font-size:8px;color:"+rC+"'>"+(d?"$"+pf(p,1):"—")+"</div>";
+      b.addEventListener("click",function(){sel=t;render()});
+      el.appendChild(b);
+    })(MYPORT[i]);
+  }
+  var db=document.createElement("button");db.className="dum";
+  db.innerHTML="<div>₿ BTC/XRP</div><div style='font-size:7px'>편입 예정</div>";
+  el.appendChild(db);
+}
+
+function rTabs(){
+  var el=$("tabs");el.innerHTML="";
+  var items=[["signal","📊 시그널"],["target","🎯 목표가"],["portfolio","💼 배분"],["rec","🏆 추천종목"],["sector","🔄 순환매"]];
+  for(var i=0;i<items.length;i++){
+    (function(it){
+      var b=document.createElement("button");b.textContent=it[1];
+      if(tab===it[0])b.className="on";
+      b.addEventListener("click",function(){tab=it[0];render()});
+      el.appendChild(b);
+    })(items[i]);
+  }
+}
+
+function render(){
+  rHdr();rStrip();rTabs();
+  var panels=["pSignal","pTarget","pPort","pRec","pSector"];
+  var tabMap={"signal":"pSignal","target":"pTarget","portfolio":"pPort","rec":"pRec","sector":"pSector"};
+  for(var i=0;i<panels.length;i++){$(panels[i]).className=panels[i]===tabMap[tab]?"":"hide"}
+  if(tab==="signal")rSignal();
+  else if(tab==="target")rTarget();
+  else if(tab==="portfolio")rPort();
+  else if(tab==="rec")rRec();
+  else if(tab==="sector")rSector();
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+function init(){
+  loadTD();
+  var saved=safeLoad("av_key");if(saved)$("apiKey").value=saved;
+  updateQuotaUI();
+  $("btnFetch").addEventListener("click",function(){startFullScan()});
+  $("apiKey").addEventListener("keydown",function(e){if(e.key==="Enter"||e.keyCode===13){e.preventDefault();startFullScan()}});
+  render();
+}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init)}else{init()}
+</script>
+</body>
+</html>

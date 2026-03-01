@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python)",
+      "Bash(where pip)",
+      "Bash(python -c \"import yfinance; print\\(''yfinance OK''\\)\")",
+      "Bash(python -c \"import pandas; print\\(''pandas OK''\\)\")",
+      "Bash(python -c \"import openpyxl; print\\(''openpyxl OK''\\)\")",
+      "Bash(\"/c/Users/user/AppData/Local/Microsoft/WindowsApps/python.exe\" --version)",
+      "Bash(cmd.exe /c \"python --version\")",
+      "Bash(cmd.exe /c \"py --version\")",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(where.exe node)",
+      "Bash(where.exe npm)",
+      "Bash(powershell.exe -Command \"Get-Command python -ErrorAction SilentlyContinue | Select-Object Source\")",
+      "Bash(powershell.exe -Command \"python -c ''print\\(1+1\\)''\")",
+      "Bash(curl --version)",
+      "Bash(bash fetch_sp500.sh)",
+      "Bash(bash analyze_and_build.sh)",
+      "Bash(awk -f \"C:/Users/user/OneDrive/바탕 화면/주식투자/클로드/주식투자/parse_top.awk\" \"C:/Users/user/OneDrive/바탕 화면/주식투자/클로드/주식투자/sp500_analyzed.json\")",
+      "Bash(bash \"C:/Users/user/OneDrive/바탕 화면/주식투자/클로드/주식투자/gen_td.sh\")",
+      "Bash(bash \"C:/Users/user/OneDrive/바탕 화면/주식투자/클로드/주식투자/gen_td2.sh\")",
+      "Bash(tr -cd '{}')",
+      "Bash(pip --version)",
+      "Bash(pip install yfinance openpyxl pandas lxml)",
+      "Bash(python daily_sp500_fetcher.py)",
+      "Bash(python generate_dashboard.py)",
+      "Bash(cmd //c daily_update.bat)",
+      "Bash(cmd //c \"\"\"C:\\\\Users\\\\user\\\\OneDrive\\\\바탕 화면\\\\주식투자\\\\클로드\\\\주식투자\\\\daily_update.bat\"\"\")",
+      "Bash(cmd.exe /c daily_update.bat)",
+      "Bash(cmd.exe /c \"cd /d \"\"C:\\\\Users\\\\user\\\\OneDrive\\\\바탕 화면\\\\주식투자\\\\클로드\\\\주식투자\"\" && daily_update.bat\")",
+      "Bash(python -c \":*)",
+      "Bash(findstr /C:\"analyst\" /C:\"DONE\" /C:\"Analyst\" /C:\"Fetching\" /C:\"Saved\" /C:\"chart data\" /C:\"Error\" /C:\"failed\" /C:\"NVDA\" /C:\"TSM\" /C:\"MU\" /C:\"CEG\" /C:\"SOXL\" /C:\"IONQ\" /C:\"CRCL\" /C:\"Target\")",
+      "Bash(wc -l \"C:\\\\Users\\\\user\\\\OneDrive\\\\바탕 화면\\\\주식투자\\\\클로드\\\\주식투자\\\\대시보드_PC_v3_프리장실시간_로고 \\(1\\).html\")"
+    ]
+  }
+}

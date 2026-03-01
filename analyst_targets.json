@@ -1,0 +1,72 @@
+{
+  "NVDA": {
+    "currentPrice": 177.19,
+    "targetLowPrice": 140.0,
+    "targetMeanPrice": 262.51,
+    "targetHighPrice": 380.0,
+    "targetMedianPrice": 261.92,
+    "numberOfAnalystOpinions": 58,
+    "recommendationKey": "strong_buy",
+    "recommendationMean": 1.31
+  },
+  "TSM": {
+    "currentPrice": 374.58,
+    "targetLowPrice": 287.6,
+    "targetMeanPrice": 421.49,
+    "targetHighPrice": 520.0,
+    "targetMedianPrice": 431.5,
+    "numberOfAnalystOpinions": 18,
+    "recommendationKey": "none",
+    "recommendationMean": null
+  },
+  "MU": {
+    "currentPrice": 412.37,
+    "targetLowPrice": 196.0,
+    "targetMeanPrice": 390.9,
+    "targetHighPrice": 523.0,
+    "targetMedianPrice": 400.0,
+    "numberOfAnalystOpinions": 39,
+    "recommendationKey": "buy",
+    "recommendationMean": 1.56
+  },
+  "CEG": {
+    "currentPrice": 329.88,
+    "targetLowPrice": 277.0,
+    "targetMeanPrice": 393.93,
+    "targetHighPrice": 481.0,
+    "targetMedianPrice": 406.5,
+    "numberOfAnalystOpinions": 18,
+    "recommendationKey": "buy",
+    "recommendationMean": 1.74
+  },
+  "SOXL": {
+    "currentPrice": 62.77,
+    "targetLowPrice": null,
+    "targetMeanPrice": null,
+    "targetHighPrice": null,
+    "targetMedianPrice": null,
+    "numberOfAnalystOpinions": 0,
+    "recommendationKey": "",
+    "recommendationMean": null
+  },
+  "IONQ": {
+    "currentPrice": 38.37,
+    "targetLowPrice": 35.0,
+    "targetMeanPrice": 67.04,
+    "targetHighPrice": 100.0,
+    "targetMedianPrice": 65.0,
+    "numberOfAnalystOpinions": 13,
+    "recommendationKey": "buy",
+    "recommendationMean": 1.54
+  },
+  "CRCL": {
+    "currentPrice": 83.44,
+    "targetLowPrice": 50.0,
+    "targetMeanPrice": 125.41,
+    "targetHighPrice": 280.0,
+    "targetMedianPrice": 97.0,
+    "numberOfAnalystOpinions": 20,
+    "recommendationKey": "buy",
+    "recommendationMean": 2.22
+  }
+}

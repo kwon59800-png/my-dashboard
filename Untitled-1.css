@@ -1,0 +1,70 @@
+:root {
+  /* ── FOUNDATION (NexusBank Style: Deep Teal Dark Theme) ── */
+  --bg:   #0b1111; 
+  --s1:   #121b1b; 
+  --s2:   #172221; 
+  --s3:   #1c2827; 
+  --s4:   #253533; 
+  --s5:   #2e413f;
+
+  /* ── BORDERS ── */
+  --b1:   rgba(42, 213, 157, 0.08); 
+  --b2:   rgba(42, 213, 157, 0.04);
+  --b3:   rgba(255, 255, 255, 0.02);
+  --b4:   transparent;
+
+  /* ── TEXT ── */
+  --t1:   #ffffff; 
+  --t2:   #a0b0af; 
+  --t3:   #738685; 
+  --t4:   #4a5c5b; 
+
+  /* ── ACCENT PALETTE (Mint & Lavender) ── */
+  --blue:   #2ad59d; 
+  --b-lo:   rgba(42, 213, 157, 0.15);
+  --b-md:   rgba(42, 213, 157, 0.3);
+  --up:     #2ad59d; 
+  --up-lo:  rgba(42, 213, 157, 0.15);
+  --dn:     #ff6b6b; 
+  --dn-lo:  rgba(255, 107, 107, 0.15);
+  --oj:     #f5a623; 
+  --oj-lo:  rgba(245, 166, 35, 0.15);
+  --pu:     #9d7bff; 
+  --pu-lo:  rgba(157, 123, 255, 0.15);
+  --cy:     #00e5ff; 
+  --cy-lo:  rgba(0, 229, 255, 0.15);
+
+  /* ── LAYOUT ── */
+  --topbar-h:  65px;
+  --ticker-h:  30px;
+  --sidebar-w: 320px;
+  --right-w:   320px;
+
+  /* ── TYPOGRAPHY ── */
+  --font-sans:  'DM Sans', -apple-system, sans-serif;
+  --font-brand: 'Syne', sans-serif;
+  --font-mono:  'JetBrains Mono', monospace;
+}
+
+/* ── 둥근 모서리(Border-radius) 및 카드 디자인 전면 개편 ── */
+.cd, .sa-card, .an-card, .goal-card, .stat-cell, .rp-section, .watch-ac, .ai, .mom-row, .sec-card {
+   border-radius: 20px !important; 
+   border: 1px solid rgba(255, 255, 255, 0.03) !important;
+   background: var(--s2) !important;
+   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+#topbar { background: transparent !important; border: none !important; padding-top: 10px !important; }
+#topbar::after { display: none; }
+.panel-hd { background: transparent !important; border: none !important; padding: 10px 16px 4px !important; }
+
+#center-tabs { background: transparent !important; border: none !important; padding: 10px 20px !important; gap: 10px !important; }
+.ctab-main { border-radius: 20px !important; padding: 10px 20px !important; background: var(--s3) !important; border: none !important; color: var(--t2) !important; font-size: 11px !important; }
+.ctab-main.on { background: var(--blue) !important; color: #000000 !important; font-weight: 800 !important; box-shadow: 0 4px 12px rgba(42, 213, 157, 0.4) !important; }
+
+.ar, .rr, .news-item { border-radius: 14px !important; border: 1px solid rgba(255,255,255,0.02) !important; background: var(--s2); margin: 0 10px 8px !important; padding: 12px 14px !important; }
+.ar::before { display: none !important; } 
+.ar:hover, .rr:hover { background: var(--s3) !important; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.3); border-color: var(--b-lo) !important; }
+
+#sidebar, #rightpanel { background: transparent !important; border: none !important; padding: 10px; }
+#center { background: var(--bg) !important; border-radius: 30px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 0 40px rgba(0,0,0,0.4); }

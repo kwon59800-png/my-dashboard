@@ -1,0 +1,127 @@
+2026-02-27 20:07:43,866 [INFO] ============================================================
+2026-02-27 20:07:43,866 [INFO] S&P 500 Daily Fetcher START
+2026-02-27 20:07:43,866 [INFO] ============================================================
+2026-02-27 20:07:44,311 [ERROR] Failed to fetch S&P 500 list: HTTP Error 403: Forbidden
+2026-02-27 20:08:09,683 [INFO] ============================================================
+2026-02-27 20:08:09,684 [INFO] S&P 500 Daily Fetcher START
+2026-02-27 20:08:09,684 [INFO] ============================================================
+2026-02-27 20:08:10,454 [INFO] S&P 500 ticker count: 503
+2026-02-27 20:08:10,454 [INFO] Downloading 503 tickers...
+2026-02-27 20:08:10,458 [INFO] Failed to create TzCache, reason: Error creating TzCache folder: 'C:\Users\user\AppData\Local\py-yfinance' reason: [WinError 183] 파일이 이미 있으므로 만들 수 없습니다: 'C:\\Users\\user\\AppData\\Local\\py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-02-27 20:08:10,458 [INFO] Failed to create TzCache, reason: Error creating TzCache folder: 'C:\Users\user\AppData\Local\py-yfinance' reason: [WinError 183] 파일이 이미 있으므로 만들 수 없습니다: 'C:\\Users\\user\\AppData\\Local\\py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-02-27 20:08:41,861 [INFO] Computed indicators for 503 tickers
+2026-02-27 20:08:42,298 [INFO] Saved to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\daily_sp500.xlsx
+2026-02-27 20:08:42,298 [INFO] Top 10 by Composite Score:
+2026-02-27 20:08:42,299 [INFO]    1. SJM    Score= 73.8  Close=$116.0     Chg= +8.82%  RSI=63.3
+2026-02-27 20:08:42,299 [INFO]    2. AXON   Score= 72.7  Close=$550.19    Chg= +5.77%  RSI=83.2
+2026-02-27 20:08:42,299 [INFO]    3. TKO    Score= 72.0  Close=$223.81    Chg= +8.01%  RSI=60.7
+2026-02-27 20:08:42,299 [INFO]    4. Q      Score= 71.4  Close=$124.78    Chg= +4.10%  RSI=80.5
+2026-02-27 20:08:42,299 [INFO]    5. DVA    Score= 69.0  Close=$152.54    Chg= +2.03%  RSI=54.3
+2026-02-27 20:08:42,299 [INFO]    6. APA    Score= 68.9  Close=$29.1      Chg= +4.53%  RSI=64.5
+2026-02-27 20:08:42,299 [INFO]    7. SNDK   Score= 68.6  Close=$651.9     Chg= +3.09%  RSI=61.3
+2026-02-27 20:08:42,299 [INFO]    8. NCLH   Score= 68.2  Close=$25.02     Chg= +5.08%  RSI=63.7
+2026-02-27 20:08:42,300 [INFO]    9. MCK    Score= 65.7  Close=$974.45    Chg= +1.16%  RSI=54.5
+2026-02-27 20:08:42,300 [INFO]   10. TPR    Score= 65.5  Close=$160.49    Chg= +2.28%  RSI=72.8
+2026-02-27 20:08:42,300 [INFO] DONE
+2026-02-27 20:21:10,786 [INFO] ============================================================
+2026-02-27 20:21:10,786 [INFO] S&P 500 Daily Fetcher START
+2026-02-27 20:21:10,786 [INFO] ============================================================
+2026-02-27 20:21:11,677 [INFO] S&P 500 ticker count: 503
+2026-02-27 20:21:11,677 [INFO] Extra tickers added: 15 → total 518
+2026-02-27 20:21:11,678 [INFO] Downloading 518 tickers...
+2026-02-27 20:21:42,588 [INFO] Computed indicators for 503 tickers
+2026-02-27 20:21:43,083 [INFO] Saved to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\daily_sp500.xlsx
+2026-02-27 20:21:44,306 [INFO] Saved chart data for 518 tickers to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\chart_data.json
+2026-02-27 20:21:44,306 [INFO] Top 10 by Composite Score:
+2026-02-27 20:21:44,307 [INFO]    1. SJM    Score= 73.8  Close=$116.0     Chg= +8.82%  RSI=63.3
+2026-02-27 20:21:44,307 [INFO]    2. AXON   Score= 72.7  Close=$550.19    Chg= +5.77%  RSI=83.2
+2026-02-27 20:21:44,307 [INFO]    3. TKO    Score= 72.0  Close=$223.81    Chg= +8.01%  RSI=60.7
+2026-02-27 20:21:44,307 [INFO]    4. Q      Score= 71.4  Close=$124.78    Chg= +4.10%  RSI=80.5
+2026-02-27 20:21:44,307 [INFO]    5. DVA    Score= 69.0  Close=$152.54    Chg= +2.03%  RSI=54.3
+2026-02-27 20:21:44,307 [INFO]    6. APA    Score= 68.9  Close=$29.1      Chg= +4.53%  RSI=64.5
+2026-02-27 20:21:44,307 [INFO]    7. SNDK   Score= 68.6  Close=$651.9     Chg= +3.09%  RSI=61.3
+2026-02-27 20:21:44,308 [INFO]    8. NCLH   Score= 68.2  Close=$25.02     Chg= +5.08%  RSI=63.7
+2026-02-27 20:21:44,308 [INFO]    9. MCK    Score= 65.7  Close=$974.45    Chg= +1.16%  RSI=54.5
+2026-02-27 20:21:44,308 [INFO]   10. TPR    Score= 65.5  Close=$160.49    Chg= +2.28%  RSI=72.8
+2026-02-27 20:21:44,308 [INFO] DONE
+2026-02-27 23:10:41,329 [INFO] ============================================================
+2026-02-27 23:10:41,330 [INFO] S&P 500 Daily Fetcher START
+2026-02-27 23:10:41,330 [INFO] ============================================================
+2026-02-27 23:10:42,262 [INFO] S&P 500 ticker count: 503
+2026-02-27 23:10:42,262 [INFO] Extra tickers added: 16 → total 519
+2026-02-27 23:10:42,263 [INFO] Downloading 519 tickers...
+2026-02-27 23:11:07,091 [INFO] Computed indicators for 503 tickers
+2026-02-27 23:11:07,693 [INFO] Saved to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\daily_sp500.xlsx
+2026-02-27 23:11:08,874 [INFO] Saved chart data for 519 tickers to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\chart_data.json
+2026-02-27 23:11:08,875 [INFO] Top 10 by Composite Score:
+2026-02-27 23:11:08,875 [INFO]    1. SJM    Score= 73.8  Close=$116.0     Chg= +8.82%  RSI=63.3
+2026-02-27 23:11:08,875 [INFO]    2. AXON   Score= 72.7  Close=$550.19    Chg= +5.77%  RSI=83.2
+2026-02-27 23:11:08,876 [INFO]    3. TKO    Score= 72.0  Close=$223.81    Chg= +8.01%  RSI=60.7
+2026-02-27 23:11:08,876 [INFO]    4. Q      Score= 71.4  Close=$124.78    Chg= +4.10%  RSI=80.5
+2026-02-27 23:11:08,876 [INFO]    5. DVA    Score= 69.0  Close=$152.54    Chg= +2.03%  RSI=54.3
+2026-02-27 23:11:08,876 [INFO]    6. APA    Score= 68.9  Close=$29.1      Chg= +4.53%  RSI=64.5
+2026-02-27 23:11:08,876 [INFO]    7. SNDK   Score= 68.6  Close=$651.9     Chg= +3.09%  RSI=61.3
+2026-02-27 23:11:08,877 [INFO]    8. NCLH   Score= 68.2  Close=$25.02     Chg= +5.08%  RSI=63.7
+2026-02-27 23:11:08,877 [INFO]    9. MCK    Score= 65.7  Close=$974.45    Chg= +1.16%  RSI=54.5
+2026-02-27 23:11:08,877 [INFO]   10. TPR    Score= 65.5  Close=$160.49    Chg= +2.28%  RSI=72.8
+2026-02-27 23:11:08,877 [INFO] DONE
+2026-02-27 23:32:24,984 [INFO] ============================================================
+2026-02-27 23:32:24,984 [INFO] S&P 500 Daily Fetcher START
+2026-02-27 23:32:24,984 [INFO] ============================================================
+2026-02-27 23:32:25,722 [INFO] S&P 500 ticker count: 503
+2026-02-27 23:32:25,723 [INFO] Extra tickers added: 16 → total 519
+2026-02-27 23:32:25,723 [INFO] Downloading 519 tickers...
+2026-02-27 23:32:50,005 [INFO] Computed indicators for 503 tickers
+2026-02-27 23:32:50,432 [INFO] Saved to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\daily_sp500.xlsx
+2026-02-27 23:32:51,518 [INFO] Saved chart data for 519 tickers to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\chart_data.json
+2026-02-27 23:32:51,518 [INFO] Top 10 by Composite Score:
+2026-02-27 23:32:51,519 [INFO]    1. DELL   Score= 73.0  Close=$142.42    Chg=+17.27%  RSI=67.5
+2026-02-27 23:32:51,520 [INFO]    2. NFLX   Score= 69.9  Close=$92.04     Chg= +8.81%  RSI=65.7
+2026-02-27 23:32:51,520 [INFO]    3. XYZ    Score= 66.8  Close=$64.33     Chg=+17.98%  RSI=63.4
+2026-02-27 23:32:51,520 [INFO]    4. HSY    Score= 61.5  Close=$232.94    Chg= +0.62%  RSI=54.4
+2026-02-27 23:32:51,520 [INFO]    5. ALB    Score= 61.5  Close=$184.27    Chg= -0.36%  RSI=62.6
+2026-02-27 23:32:51,521 [INFO]    6. AXON   Score= 61.4  Close=$542.1     Chg= -1.47%  RSI=79.0
+2026-02-27 23:32:51,521 [INFO]    7. PYPL   Score= 61.0  Close=$46.01     Chg= +1.07%  RSI=69.8
+2026-02-27 23:32:51,521 [INFO]    8. KEYS   Score= 59.6  Close=$304.39    Chg= -0.53%  RSI=88.2
+2026-02-27 23:32:51,521 [INFO]    9. NEM    Score= 59.6  Close=$129.86    Chg= +1.87%  RSI=67.6
+2026-02-27 23:32:51,521 [INFO]   10. MCK    Score= 59.0  Close=$980.0     Chg= +0.57%  RSI=58.7
+2026-02-27 23:32:51,521 [INFO] Fetching analyst target data for portfolio...
+2026-02-27 23:32:52,549 [INFO]   [NVDA] Price=$180.97, TargetMean=$262.50742, Low=$140.0, High=$380.0, Analysts=58, Rec=strong_buy
+2026-02-27 23:32:53,215 [INFO]   [TSM] Price=$369.97, TargetMean=$421.49057, Low=$287.6, High=$520.0, Analysts=18, Rec=none
+2026-02-27 23:32:53,879 [INFO]   [MU] Price=$406.3591, TargetMean=$390.89743, Low=$196.0, High=$523.0, Analysts=39, Rec=buy
+2026-02-27 23:32:54,545 [INFO]   [CEG] Price=$321.9, TargetMean=$393.15668, Low=$277.0, High=$481.0, Analysts=18, Rec=buy
+2026-02-27 23:32:55,312 [INFO]   [SOXL] Price=$61.6399, TargetMean=$None, Low=$None, High=$None, Analysts=None, Rec=
+2026-02-27 23:32:55,977 [INFO]   [IONQ] Price=$38.47, TargetMean=$67.04077, Low=$35.0, High=$100.0, Analysts=13, Rec=buy
+2026-02-27 23:32:56,639 [INFO]   [CRCL] Price=$84.1, TargetMean=$124.46, Low=$50.0, High=$280.0, Analysts=20, Rec=buy
+2026-02-27 23:32:56,941 [INFO] Saved analyst targets: 6/7 tickers with data → C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\analyst_targets.json
+2026-02-27 23:32:56,941 [INFO] DONE
+2026-02-28 11:37:32,856 [INFO] ============================================================
+2026-02-28 11:37:32,857 [INFO] S&P 500 Daily Fetcher START
+2026-02-28 11:37:32,857 [INFO] ============================================================
+2026-02-28 11:37:33,767 [INFO] S&P 500 ticker count: 503
+2026-02-28 11:37:33,768 [INFO] Extra tickers added: 16 → total 519
+2026-02-28 11:37:33,768 [INFO] Downloading 519 tickers...
+2026-02-28 11:37:57,805 [INFO] Computed indicators for 503 tickers
+2026-02-28 11:37:58,272 [INFO] Saved to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\daily_sp500.xlsx
+2026-02-28 11:37:59,558 [INFO] Saved chart data for 519 tickers to C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\chart_data.json
+2026-02-28 11:37:59,558 [INFO] Top 10 by Composite Score:
+2026-02-28 11:37:59,559 [INFO]    1. PSKY   Score= 86.4  Close=$13.51     Chg=+20.84%  RSI=73.1
+2026-02-28 11:37:59,559 [INFO]    2. DELL   Score= 84.9  Close=$148.08    Chg=+21.93%  RSI=70.2
+2026-02-28 11:37:59,560 [INFO]    3. NFLX   Score= 83.3  Close=$96.24     Chg=+13.77%  RSI=69.8
+2026-02-28 11:37:59,560 [INFO]    4. XYZ    Score= 75.3  Close=$63.7      Chg=+16.82%  RSI=62.7
+2026-02-28 11:37:59,560 [INFO]    5. HUBB   Score= 70.1  Close=$511.63    Chg= -2.13%  RSI=56.7
+2026-02-28 11:37:59,560 [INFO]    6. HSY    Score= 69.0  Close=$236.28    Chg= +2.06%  RSI=58.6
+2026-02-28 11:37:59,561 [INFO]    7. AES    Score= 68.2  Close=$17.28     Chg= +6.34%  RSI=73.2
+2026-02-28 11:37:59,561 [INFO]    8. MCK    Score= 67.5  Close=$987.37    Chg= +1.33%  RSI=60.3
+2026-02-28 11:37:59,561 [INFO]    9. AMGN   Score= 67.5  Close=$388.16    Chg= +2.33%  RSI=54.9
+2026-02-28 11:37:59,561 [INFO]   10. NEM    Score= 67.0  Close=$130.0     Chg= +1.98%  RSI=67.7
+2026-02-28 11:37:59,561 [INFO] Fetching analyst target data for portfolio...
+2026-02-28 11:38:00,636 [INFO]   [NVDA] Price=$177.19, TargetMean=$262.50742, Low=$140.0, High=$380.0, Analysts=58, Rec=strong_buy
+2026-02-28 11:38:01,289 [INFO]   [TSM] Price=$374.58, TargetMean=$421.49057, Low=$287.6, High=$520.0, Analysts=18, Rec=none
+2026-02-28 11:38:01,946 [INFO]   [MU] Price=$412.37, TargetMean=$390.89743, Low=$196.0, High=$523.0, Analysts=39, Rec=buy
+2026-02-28 11:38:02,601 [INFO]   [CEG] Price=$329.88, TargetMean=$393.93445, Low=$277.0, High=$481.0, Analysts=18, Rec=buy
+2026-02-28 11:38:03,253 [INFO]   [SOXL] Price=$62.77, TargetMean=$None, Low=$None, High=$None, Analysts=None, Rec=
+2026-02-28 11:38:04,130 [INFO]   [IONQ] Price=$38.37, TargetMean=$67.04077, Low=$35.0, High=$100.0, Analysts=13, Rec=buy
+2026-02-28 11:38:04,780 [INFO]   [CRCL] Price=$83.44, TargetMean=$125.41, Low=$50.0, High=$280.0, Analysts=20, Rec=buy
+2026-02-28 11:38:05,082 [INFO] Saved analyst targets: 6/7 tickers with data → C:\Users\user\OneDrive\바탕 화면\주식투자\클로드\주식투자\analyst_targets.json
+2026-02-28 11:38:05,083 [INFO] DONE
