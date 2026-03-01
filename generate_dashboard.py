@@ -1862,7 +1862,11 @@ function gen(){
   history.unshift({menu:menuNm?menuNm.nm:'',prompt:prompt,time:new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})});
   if(history.length>10) history.pop();
   render();
-  setTimeout(function(){ var ta=$('an-prompt-ta'); if(ta) ta.scrollIntoView({behavior:'smooth',block:'center'}); },100);
+  setTimeout(function(){
+    var ta=$('an-prompt-ta');
+    var panel=document.getElementById('analyst-panel');
+    if(ta && panel){ panel.scrollTop=ta.offsetTop-20; }
+  },120);
 }
 
 function copyPrompt(){
@@ -1875,7 +1879,11 @@ function clearHist(){ history=[]; render(); }
 function loadHist(i){
   var e=history[i]; if(!e) return;
   prompt=e.prompt; render();
-  setTimeout(function(){ var ta=$('an-prompt-ta'); if(ta) ta.scrollIntoView({behavior:'smooth',block:'center'}); },100);
+  setTimeout(function(){
+    var ta=$('an-prompt-ta');
+    var panel=document.getElementById('analyst-panel');
+    if(ta && panel){ panel.scrollTop=ta.offsetTop-20; }
+  },120);
 }
 
 /* ═══ 프롬프트 생성 함수들 ═══ */

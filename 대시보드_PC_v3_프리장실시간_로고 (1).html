@@ -49,13 +49,38 @@
   --rose:   #fb7185;
   --rose-lo:rgba(251,113,133,0.1);
 
+  /* ── ALIASES (score modal / article) ── */
+  --c1:  var(--s3);
+  --acc: var(--blue);
+  --bd:  var(--b1);
+
   /* ── LAYOUT ── */
   --topbar-h:  64px;
   --ticker-h:  0px;
   --sidebar-w: 0px;
   --right-w:   340px;
   --icon-sidebar-w: 64px;
-  --card-radius: 24px;
+  --card-radius: 20px;
+
+  /* ── DESIGN TOKENS ── */
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   20px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --font-heading: 13px;
+  --font-body:    10px;
+  --font-caption: 8px;
+  --font-micro:   7px;
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  20px;
+  --space-2xl: 24px;
 
   /* ── TYPOGRAPHY ── */
   --font-sans:  'DM Sans', -apple-system, sans-serif;
@@ -119,10 +144,10 @@ body {
 
 /* ── 카드 레이아웃 ── */
 .cd, .goal-card, .rp-section, .watch-ac, .ai, .sec-card {
-  background: #11181C !important;
-  border-radius: 24px !important;
-  padding: 18px !important;
-  margin-bottom: 16px !important;
+  background: var(--s1) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: var(--space-lg) !important;
+  margin-bottom: var(--space-lg) !important;
   border: none !important;
   box-shadow: none !important;
 }
@@ -310,8 +335,8 @@ body {
 .reb-item:last-child { border-bottom: none; }
 .reb-item .reb-ticker { font-weight: 700; color: var(--t1); }
 .reb-item .reb-action { font-weight: 600; padding: 2px 6px; border-radius: 4px; font-size: 9px; }
-.reb-item .reb-action.buy { background: rgba(0,255,136,.12); color: var(--up); }
-.reb-item .reb-action.sell { background: rgba(240,82,82,.12); color: var(--dn); }
+.reb-item .reb-action.buy { background: var(--up-lo); color: var(--up); }
+.reb-item .reb-action.sell { background: var(--dn-lo); color: var(--dn); }
 .reb-item .reb-action.hold { background: var(--s3); color: var(--t3); }
 
 /* ── Analyst Panel ── */
@@ -325,15 +350,15 @@ body {
 .an-tab:hover { color:var(--t2); background:rgba(255,255,255,.03); }
 .an-tab.on { border-color:var(--blue); background:rgba(59,130,246,.1); color:var(--blue); }
 .an-body { min-height:200px; }
-.an-card { background:var(--s2); border:1px solid var(--b2); border-radius:10px; padding:12px; margin-bottom:8px; }
-.an-card-title { font-size:10px; font-weight:700; color:var(--t2); margin-bottom:8px; }
+.an-card { background:var(--s1); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-lg); margin-bottom:8px; }
+.an-card-title { font-size:11px; font-weight:700; color:var(--t2); margin-bottom:8px; }
 .an-opt-grid { display:grid; gap:5px; }
 .an-opt-grid.c2 { grid-template-columns:1fr 1fr; } .an-opt-grid.c3 { grid-template-columns:1fr 1fr 1fr; }
 .an-opt-grid.c4 { grid-template-columns:1fr 1fr 1fr 1fr; } .an-opt-grid.c5 { grid-template-columns:repeat(5,1fr); }
-.an-opt { padding:7px 4px; border-radius:8px; border:1.5px solid var(--b2); background:var(--s2); color:var(--t3); font-size:9px; font-weight:600; text-align:center; cursor:pointer; transition:all .15s; }
+.an-opt { padding:7px 4px; border-radius:var(--radius-sm); border:1.5px solid var(--b2); background:var(--s2); color:var(--t3); font-size:9px; font-weight:600; text-align:center; cursor:pointer; transition:all .15s; }
 .an-opt:hover { border-color:var(--t3); }
 .an-opt.on { border-color:var(--blue); background:rgba(59,130,246,.12); color:var(--blue); }
-.an-stock-wrap { background:var(--s2); border:1px solid var(--b2); border-radius:10px; padding:10px; margin-bottom:8px; }
+.an-stock-wrap { background:var(--s1); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-lg); margin-bottom:8px; }
 .an-stock-sel { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px; }
 .an-stock-chip { padding:4px 8px; border-radius:12px; border:1.5px solid var(--b2); background:var(--s3); color:var(--t3); font-size:8px; font-weight:600; cursor:pointer; transition:all .12s; }
 .an-stock-chip:hover { border-color:var(--t3); }
@@ -342,20 +367,20 @@ body {
 .an-stock-tag { display:flex; align-items:center; gap:3px; padding:3px 8px; border-radius:10px; background:var(--blue); color:#fff; font-size:8px; font-weight:600; }
 .an-stock-tag .x { cursor:pointer; font-weight:800; margin-left:2px; }
 .an-input-row { display:flex; gap:4px; margin-bottom:8px; }
-.an-input { flex:1; padding:7px 10px; border-radius:8px; border:1px solid var(--b2); background:var(--s3); color:var(--t1); font-size:10px; outline:none; }
+.an-input { flex:1; padding:7px 10px; border-radius:var(--radius-sm); border:1px solid var(--b2); background:var(--s3); color:var(--t1); font-size:10px; outline:none; }
 .an-input:focus { border-color:var(--blue); }
 .an-btn-sm { padding:7px 12px; border-radius:12px; background:var(--s3); color:var(--t2); font-size:9px; font-weight:700; cursor:pointer; border:1px solid var(--b2); transition:all .14s; }
 .an-btn-sm:hover { background:var(--blue); color:#000; border-color:var(--blue); }
-.an-gen-btn { width:100%; padding:12px; border-radius:10px; background:linear-gradient(135deg,var(--blue),#8b5cf6); color:#fff; font-size:12px; font-weight:800; cursor:pointer; border:none; margin-top:6px; transition:opacity .15s; }
+.an-gen-btn { width:100%; padding:12px; border-radius:var(--radius-md); background:linear-gradient(135deg,var(--blue),#8b5cf6); color:#fff; font-size:12px; font-weight:800; cursor:pointer; border:none; margin-top:6px; transition:opacity .15s; }
 .an-gen-btn:hover { opacity:.9; }
 .an-gen-btn:disabled { opacity:.4; cursor:not-allowed; }
-.an-result { background:var(--s2); border:1px solid var(--b2); border-radius:10px; padding:10px; margin-top:10px; }
+.an-result { background:var(--s1); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-lg); margin-top:10px; }
 .an-result-hd { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .an-result-hd h3 { font-size:12px; font-weight:800; color:var(--t1); margin:0; }
-.an-copy-btn { padding:6px 14px; border-radius:8px; background:var(--blue); color:#fff; font-size:9px; font-weight:700; cursor:pointer; border:none; }
-.an-textarea { width:100%; height:300px; background:var(--s3); border:1px solid var(--b2); border-radius:8px; padding:8px; color:var(--t2); font-size:8px; font-family:var(--font-mono); line-height:1.5; resize:vertical; outline:none; box-sizing:border-box; }
+.an-copy-btn { padding:6px 14px; border-radius:var(--radius-sm); background:var(--blue); color:#fff; font-size:9px; font-weight:700; cursor:pointer; border:none; }
+.an-textarea { width:100%; height:280px; background:var(--s3); border:1px solid var(--b2); border-radius:var(--radius-sm); padding:10px 12px; color:var(--t1); font-size:10px; font-family:var(--font-mono); line-height:1.65; resize:vertical; outline:none; box-sizing:border-box; letter-spacing:0.01em; }
 .an-textarea:focus { border-color:var(--blue); }
-.an-tip { margin-top:6px; padding:6px 10px; border-radius:8px; background:rgba(59,130,246,.06); border:1px solid rgba(59,130,246,.15); font-size:8px; color:var(--blue); }
+.an-tip { margin-top:6px; padding:8px 12px; border-radius:var(--radius-sm); background:rgba(41,161,123,.06); border:1px solid rgba(41,161,123,.15); font-size:9px; font-weight:600; color:var(--blue); }
 .an-term-item { background:var(--s2); border:1px solid var(--b2); border-radius:8px; overflow:hidden; margin-bottom:4px; }
 .an-term-hd { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; cursor:pointer; }
 .an-term-hd:hover { background:rgba(255,255,255,.02); }
@@ -705,7 +730,7 @@ canvas { border-radius: 1.5rem; }
 .ar-pf   { height:100%; border-radius:100px; transition:width 1.2s ease; }
 
 /* PRE / POST MARKET PRICE */
-.pre-price  { color:#b99bff; font-size:10px; font-weight:600; font-family:var(--font-mono); line-height:1.2; }
+.pre-price  { color:var(--pu); font-size:10px; font-weight:600; font-family:var(--font-mono); line-height:1.2; }
 .post-price { color:var(--cy);  font-size:10px; font-weight:600; font-family:var(--font-mono); line-height:1.2; }
 
 /* ══════════════════════════════════════
@@ -828,7 +853,7 @@ canvas { border-radius: 1.5rem; }
 .dialog {
   background: var(--s2);
   border: 1px solid rgba(255,255,255,0.03);
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   width: 400px; max-height: 85vh;
   display: flex; flex-direction:column;
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 24px 80px rgba(0,0,0,.7);
@@ -848,13 +873,13 @@ canvas { border-radius: 1.5rem; }
 }
 .dlg-body { overflow-y:auto; padding:16px 20px; flex:1; }
 .ic {
-  width:28px; height:28px; border-radius:7px;
+  width:28px; height:28px; border-radius:var(--radius-sm);
   background:var(--s4); display:flex; align-items:center; justify-content:center;
   cursor:pointer; color:var(--t3); transition:all .12s;
 }
 .ic:hover { background:var(--dn-lo); color:var(--dn); }
 .fi {
-  width:100%; padding:8px 11px; border-radius:7px;
+  width:100%; padding:8px 11px; border-radius:var(--radius-sm);
   background:var(--s3); border:1px solid var(--b2);
   color:var(--t1); font-size:12px;
   font-family:var(--font-mono);
@@ -1152,7 +1177,7 @@ canvas { border-radius: 1.5rem; }
 #sa-panel .sa-st::-webkit-scrollbar{height:2px}
 #sa-panel .sa-st::-webkit-scrollbar-thumb{background:var(--b1)}
 #sa-panel .sa-st button {
-  flex-shrink:0;padding:3px 6px;border-radius:5px;border:1px solid var(--sa-bdr);
+  flex-shrink:0;padding:4px 8px;border-radius:var(--radius-sm);border:1px solid var(--sa-bdr);
   background:transparent;color:var(--sa-dim);font-family:var(--font-sans),system-ui,sans-serif;
   font-size:8px;font-weight:700;cursor:pointer;
 }
@@ -1164,22 +1189,22 @@ canvas { border-radius: 1.5rem; }
 }
 #sa-panel .sa-tb::-webkit-scrollbar{height:0}
 #sa-panel .sa-tb button {
-  flex-shrink:0;padding:6px 12px;border-radius:14px;border:none;
+  flex-shrink:0;padding:8px 14px;border-radius:var(--radius-md);border:none;
   font-size:9px;font-weight:700;font-family:var(--font-sans),system-ui,sans-serif;cursor:pointer;
   background:var(--s3);color:var(--sa-dim);white-space:nowrap;transition:all .15s;
 }
 #sa-panel .sa-tb button.on{background:var(--sa-b);color:#fff;box-shadow:0 2px 8px rgba(41,161,123,0.3)}
 #sa-panel .cd {
-  background:var(--sa-card);border:1px solid rgba(255,255,255,0.03);border-radius:20px;
-  padding:12px;margin-bottom:8px;
+  background:var(--s1);border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius-lg);
+  padding:var(--space-lg);margin-bottom:8px;
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 4px 20px rgba(0,0,0,0.2);
 }
 #sa-panel .cd.warn{border-color:rgba(240,82,82,.2)}
-#sa-panel .ct{font-size:10px;font-weight:700;margin-bottom:8px}
+#sa-panel .ct{font-size:var(--font-heading);font-weight:700;margin-bottom:8px}
 #sa-panel .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 #sa-panel .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
-#sa-panel .bx{padding:5px;background:var(--sa-card2);border-radius:4px}
-#sa-panel .bx .lb{color:var(--sa-dim);font-size:7px}
+#sa-panel .bx{padding:6px;background:var(--sa-card2);border-radius:var(--radius-sm)}
+#sa-panel .bx .lb{color:var(--sa-dim);font-size:var(--font-caption)}
 #sa-panel .bx .vl{font-weight:700;font-size:10px;margin-top:1px}
 #sa-panel .tbl{width:100%;border-collapse:collapse;font-size:9px}
 #sa-panel .tbl th{padding:4px 2px;text-align:center;color:var(--sa-dim);font-weight:600;font-size:7px;border-bottom:1px solid var(--sa-bdr);white-space:nowrap}
@@ -1287,7 +1312,7 @@ canvas { border-radius: 1.5rem; }
 /* Right panel supply highlights */
 #rp-supply .sa-highlight-card {
   padding: 10px; margin-bottom: 6px;
-  background: var(--s2); border-radius: 8px; border: 1px solid var(--b2);
+  background: var(--s2); border-radius: var(--radius-md); border: 1px solid var(--b2);
 }
 #rp-supply .sa-highlight-card .label {
   font-size: 9px; color: var(--t3); font-weight: 600; margin-bottom: 4px;
@@ -1317,8 +1342,8 @@ canvas { border-radius: 1.5rem; }
 .w-rec-list::-webkit-scrollbar-thumb:hover { background: var(--blue); opacity: 1; }
 .w-rec-card {
   min-width: 150px; max-width: 165px; flex-shrink: 0;
-  background: var(--s2); border: 1px solid var(--b2); border-radius: 10px;
-  padding: 10px; cursor: pointer; transition: border-color .2s, transform .15s;
+  background: var(--s1); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg);
+  padding: var(--space-lg); cursor: pointer; transition: border-color .2s, transform .15s;
   scroll-snap-align: start; position: relative;
 }
 .w-rec-card:hover { border-color: var(--blue); transform: translateY(-2px); }
@@ -1383,7 +1408,7 @@ canvas { border-radius: 1.5rem; }
   margin-bottom: 10px; position: relative;
 }
 .watch-input {
-  flex: 1; padding: 9px 14px; border-radius: 14px;
+  flex: 1; padding: 9px 14px; border-radius: var(--radius-sm);
   font-size: 11px; font-family: var(--font-mono), monospace;
   background: var(--s3); color: var(--t1); border: 1px solid var(--b2);
   outline: none; transition: border-color .2s;
@@ -1391,7 +1416,7 @@ canvas { border-radius: 1.5rem; }
 .watch-input:focus { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(41,161,123,.15); }
 .watch-input::placeholder { color: var(--t3); }
 .watch-add-btn {
-  padding: 9px 16px; border-radius: 14px; border: none;
+  padding: 9px 16px; border-radius: var(--radius-sm); border: none;
   font-size: 10px; font-weight: 700; font-family: var(--font-sans);
   background: var(--blue); color: #000; cursor: pointer;
   white-space: nowrap; transition: opacity .2s;
@@ -1453,7 +1478,7 @@ canvas { border-radius: 1.5rem; }
 #watchTbl .w-price { text-align: right; font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
 #watchTbl .w-chg { text-align: right; font-family: var(--font-mono); font-size: 10px; font-weight: 700; }
 #watchTbl .w-del {
-  width: 22px; height: 22px; border-radius: 50%; border: none;
+  width: 22px; height: 22px; border-radius: var(--radius-sm); border: none;
   background: transparent; color: var(--t3); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; transition: background .15s, color .15s;
@@ -1512,7 +1537,7 @@ canvas { border-radius: 1.5rem; }
 /* ═══ SCORE MODAL ═══ */
 #scoreModal .dialog { max-width:420px; }
 .score-tabs { display:flex;gap:6px;margin-bottom:14px; }
-.score-tab { flex:1;padding:8px 0;border:1px solid var(--bd);border-radius:14px;background:var(--c1);color:var(--t2);font-size:10px;font-weight:600;text-align:center;cursor:pointer;transition:all .15s; }
+.score-tab { flex:1;padding:8px 0;border:1px solid var(--bd);border-radius:var(--radius-md);background:var(--c1);color:var(--t2);font-size:10px;font-weight:600;text-align:center;cursor:pointer;transition:all .15s; }
 .score-tab.on { background:var(--acc);color:#000;border-color:var(--acc);font-weight:800; }
 .score-tab:hover:not(.on) { border-color:var(--acc);color:var(--acc); }
 .score-total-box { text-align:center;margin-bottom:10px; }
@@ -1524,72 +1549,155 @@ canvas { border-radius: 1.5rem; }
 .score-raw-item .sr-val { color:var(--t1);font-family:var(--font-mono),monospace;font-weight:600; }
 .score-cat-row { display:flex;justify-content:center;gap:12px;margin:6px 0 4px;font-size:9px; }
 .score-cat-pill { padding:3px 8px;border-radius:6px;background:var(--c1);font-weight:600; }
+
+/* ═══ NexusBank CARD SYSTEM ═══ */
+.nexus-card { background:var(--s1); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-xl); }
+.nexus-card-sm { background:var(--s1); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:14px; }
+.dashboard-heading { font-size:24px; font-weight:800; font-family:'Syne',var(--font-sans),sans-serif; color:var(--t1); margin:0; letter-spacing:-0.01em; }
+.dashboard-heading-sub { font-size:12px; color:var(--t3); font-weight:500; margin-top:2px; }
+
+/* Row grid */
+.nexus-bottom-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+.nexus-stat-label { font-size:10px; font-weight:600; color:var(--t3); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:8px; }
+.nexus-stat-value { font-size:22px; font-weight:800; font-family:var(--font-mono),monospace; color:var(--t1); line-height:1.2; }
+.nexus-stat-badge { display:inline-flex; align-items:center; gap:3px; font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px; margin-top:6px; }
+.nexus-stat-badge.up { background:rgba(41,161,123,0.12); color:var(--up); }
+.nexus-stat-badge.dn { background:rgba(242,78,30,0.12); color:var(--dn); }
+.nexus-stat-badge.oj { background:rgba(234,179,8,0.12); color:var(--oj); }
+.nexus-stat-badge.bl { background:rgba(41,161,123,0.08); color:var(--blue); }
+
+/* Chart card */
+.nexus-chart-card { padding:16px 18px; }
+.nexus-chart-card .chart-canvases { height:170px; }
+
+/* Donut in center */
+#donut-center-wrap { display:flex; align-items:center; gap:12px; }
+#donut-center-wrap .donut-canvas { width:100px; height:100px; flex-shrink:0; }
+#donut-center-wrap .donut-legend { font-size:9px; }
+
+/* Glass Card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(41,161,123,.18), rgba(139,92,246,.12), rgba(34,211,238,.08));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+.glass-card::before {
+  content:''; position:absolute; top:-40px; right:-30px;
+  width:120px; height:120px; border-radius:50%;
+  background:radial-gradient(circle, rgba(41,161,123,.15), transparent 70%);
+  pointer-events:none;
+}
+.glass-card::after {
+  content:''; position:absolute; bottom:-30px; left:-20px;
+  width:90px; height:90px; border-radius:50%;
+  background:radial-gradient(circle, rgba(139,92,246,.12), transparent 70%);
+  pointer-events:none;
+}
+.glass-card-label { font-size:11px; color:rgba(255,255,255,.55); font-weight:500; margin-bottom:6px; }
+.glass-card-total { font-size:26px; font-weight:800; font-family:var(--font-mono),monospace; color:var(--t1); line-height:1.2; }
+.glass-card-change { font-size:12px; font-weight:700; margin-top:4px; }
+.glass-card-row { display:flex; gap:12px; margin-top:14px; }
+.glass-card-mini { flex:1; background:rgba(255,255,255,.04); border-radius:10px; padding:10px; }
+.glass-card-mini-label { font-size:9px; color:rgba(255,255,255,.45); font-weight:500; margin-bottom:3px; }
+.glass-card-mini-val { font-size:13px; font-weight:700; font-family:var(--font-mono),monospace; color:var(--t1); }
+
+/* Nexus transaction list */
+.nexus-tx-item { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.03); }
+.nexus-tx-item:last-child { border-bottom:none; }
+.nexus-tx-ico { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.nexus-tx-info { flex:1; min-width:0; }
+.nexus-tx-name { font-size:11px; font-weight:700; color:var(--t1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.nexus-tx-date { font-size:9px; color:var(--t3); margin-top:1px; }
+.nexus-tx-amt { font-size:12px; font-weight:700; font-family:var(--font-mono),monospace; text-align:right; }
+
+/* Mini 2-col */
+.nexus-mini-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+/* Center scroll */
+#center { padding:14px 18px 18px; overflow-y:auto; gap:14px; }
+#center-tabs { margin-bottom:12px; padding:0; }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
+<!-- ══ ICON SIDEBAR ══ -->
+<div id="icon-sidebar">
+  <div class="icon-sidebar-logo">🚀</div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:12px" class="icon-nav">
+    <button class="icon-nav-btn active" onclick="switchCenterTab('assets')" id="inav-assets" title="내 자산">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </button>
+    <button class="icon-nav-btn" onclick="switchCenterTab('supply')" id="inav-supply" title="수급 분석">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </button>
+    <button class="icon-nav-btn" onclick="switchCenterTab('watch')" id="inav-watch" title="관심 종목">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </button>
+    <button class="icon-nav-btn" onclick="switchCenterTab('analyst')" id="inav-analyst" title="애널리스트">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </button>
+  </div>
+  <button class="icon-nav-btn" onclick="openEdit()" title="자산 수정" style="margin-bottom:6px">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+  </button>
+</div>
+
+<!-- ══ CONTENT AREA ══ -->
+<div id="content-area">
+
+<!-- TOPBAR (NexusBank Style) -->
 <div id="topbar">
-  <div class="tb-logo">
-    <span class="rocket-icon" style="font-size:13px;line-height:1">🚀</span>
-    <div class="rocket-trail"></div>
+  <div class="tb-brand" style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <div class="tb-name" style="font-size:14px;font-weight:800;letter-spacing:.04em;color:var(--t1)">CORE PORTFOLIO</div>
   </div>
-  <div class="tb-brand">
-    <div class="tb-name">CORE PORTFOLIO AI</div>
+  <!-- 검색바 -->
+  <div class="topbar-search" onclick="document.getElementById('watch-search')?.focus(); switchCenterTab('watch');">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span style="font-size:12px;color:var(--t3)">종목 검색...</span>
   </div>
-  <!-- 지수 인덱스 바 -->
-  <div class="index-bar">
-    <div class="index-item">
-      <span class="index-lbl">S&P 500</span>
-      <span class="index-val flat" id="idx-sp">—</span>
+  <div class="tb-spacer" style="flex:1"></div>
+  <!-- 지수 인라인 -->
+  <div class="index-bar" style="display:flex;align-items:center;gap:14px;margin-right:8px">
+    <div class="index-item" style="display:flex;align-items:center;gap:4px">
+      <span class="index-lbl" style="font-size:9px;color:var(--t3);font-weight:600">S&P</span>
+      <span class="index-val flat" id="idx-sp" style="font-size:10px">—</span>
     </div>
-    <div class="index-item">
-      <span class="index-lbl">NASDAQ</span>
-      <span class="index-val flat" id="idx-ndx">—</span>
+    <div class="index-item" style="display:flex;align-items:center;gap:4px">
+      <span class="index-lbl" style="font-size:9px;color:var(--t3);font-weight:600">NDX</span>
+      <span class="index-val flat" id="idx-ndx" style="font-size:10px">—</span>
     </div>
-    <div class="index-item">
-      <span class="index-lbl">DOW</span>
-      <span class="index-val flat" id="idx-dow">—</span>
+    <div class="index-item" style="display:flex;align-items:center;gap:4px">
+      <span class="index-lbl" style="font-size:9px;color:var(--t3);font-weight:600">DOW</span>
+      <span class="index-val flat" id="idx-dow" style="font-size:10px">—</span>
     </div>
-    <div class="index-item">
-      <span class="index-lbl">RUSSELL</span>
-      <span class="index-val flat" id="idx-rut">—</span>
+    <div class="index-item" style="display:flex;align-items:center;gap:4px">
+      <span class="index-lbl" style="font-size:9px;color:var(--t3);font-weight:600">RUT</span>
+      <span class="index-val flat" id="idx-rut" style="font-size:10px">—</span>
     </div>
   </div>
+  <!-- 시장상태 배지 -->
   <div id="mktState" class="cls"><div id="mktDot"></div><span id="mktStateLabel">장마감</span></div>
-  <div class="tb-spacer"></div>
-  <!-- 총 평가액 + 전일비 결합 -->
-  <div class="tb-stat">
-    <div class="tb-stat-lbl">총 평가액</div>
-    <div class="tb-stat-main" id="tb-total">—</div>
-    <div class="tb-stat-chg flat" id="tb-daily-chg">전일비 —</div>
-  </div>
-  <div class="tb-divider"></div>
-  <!-- 평가 손익 -->
-  <div class="tb-stat">
-    <div class="tb-stat-lbl">평가 손익</div>
-    <div class="tb-stat-val" id="tb-gain" style="color:var(--oj)">—</div>
-  </div>
-  <div class="tb-divider"></div>
-  <!-- LAST UPDATE -->
-  <div class="tb-stat">
-    <div class="tb-stat-lbl">LAST UPDATE</div>
-    <div class="tb-stat-val" id="tb-date" style="color:var(--t2)">—</div>
-  </div>
-  <div id="sd" title="API 상태" style="margin-left:4px"></div>
-  <div class="tb-acts">
-    <div class="search-btn" onclick="document.getElementById('watch-search')?.focus(); switchCenterTab('watch');" title="종목 검색">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </div>
-    <div class="tb-btn" onclick="openEdit()">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      자산 수정
-    </div>
+  <!-- 인사말 + 아바타 -->
+  <div class="topbar-greeting">Hi, Investor!</div>
+  <div class="topbar-avatar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
   </div>
 </div>
 <!-- 숨김 참조용 (기존 JS 호환) -->
-<span id="tb-pct" style="display:none">—</span>
-<span id="tb-fx" style="display:none">—</span>
+<div style="display:none">
+  <div id="tb-total">—</div>
+  <div id="tb-daily-chg">전일비 —</div>
+  <div id="tb-gain">—</div>
+  <div id="tb-date">—</div>
+  <span id="tb-pct">—</span>
+  <span id="tb-fx">—</span>
+  <div id="sd"></div>
+</div>
 
 <!-- TICKER -->
 <div id="ticker"><div id="tickerInner"></div></div>
@@ -1736,6 +1844,14 @@ canvas { border-radius: 1.5rem; }
   <!-- ══ CENTER ══ -->
   <div id="center">
 
+    <!-- Dashboard Heading -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4px">
+      <div>
+        <h1 class="dashboard-heading">My Portfolio</h1>
+        <div class="dashboard-heading-sub">포트폴리오 현황 · 실시간 데이터 기반</div>
+      </div>
+    </div>
+
     <!-- CENTER TAB BAR -->
     <div id="center-tabs">
       <button class="ctab-main on" onclick="switchCenterTab('assets')" id="ctab-assets">💼 내 자산</button>
@@ -1747,31 +1863,55 @@ canvas { border-radius: 1.5rem; }
     <!-- TAB 1: 기존 내 자산 콘텐츠 -->
     <div id="tab-assets">
 
-    <!-- CHARTS -->
-    <div class="chart-area si" style="animation-delay:.05s;border-bottom:1px solid var(--b2);padding:8px 10px 8px">
-      <div class="chart-hd">
+    <!-- ROW 1: CHART CARD (NexusBank) -->
+    <div class="nexus-card nexus-chart-card si" style="animation-delay:.05s">
+      <div class="chart-hd" style="margin-bottom:10px">
         <div>
-          <div class="chart-title">종목별 현황 차트</div>
-          <div class="chart-sub">전일 종가 기준 포트폴리오 평가</div>
+          <div class="chart-title" style="font-size:13px;font-weight:700">종목별 현황</div>
+          <div class="chart-sub" style="font-size:10px;color:var(--t3)">전일 종가 기준 포트폴리오 평가</div>
         </div>
         <div class="ctabs">
           <button class="ctab on" id="tabB" onclick="swChart('b')">평가액(M₩)</button>
           <button class="ctab" id="tabP" onclick="swChart('p')">수익률(%)</button>
         </div>
       </div>
-      <div class="chart-canvases">
+      <div class="chart-canvases" style="height:170px">
         <div id="chartB" class="chart-box"><canvas id="cBar"></canvas></div>
         <div id="chartP" class="chart-box hidden"><canvas id="cPerf"></canvas></div>
-        <!-- Donut summary on right -->
         <div id="chartD" class="chart-box" style="display:flex;flex-direction:column;gap:8px;justify-content:center;padding:0 10px">
-          <div style="font-size:8px;font-weight:700;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--font-sans),system-ui,sans-serif;margin-bottom:3px">포트폴리오 구성</div>
+          <div style="font-size:8px;font-weight:700;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px">포트폴리오 구성</div>
           <div id="miniDonutLg" style="display:flex;flex-direction:column;gap:6px"></div>
         </div>
       </div>
     </div>
 
-    <!-- MAIN ASSETS -->
-    <div class="asset-section si" style="animation-delay:.08s">
+    <!-- ROW 2: 3-COLUMN STAT CARDS -->
+    <div class="nexus-bottom-row" style="margin-top:14px">
+      <!-- 섹터 비중 도넛 -->
+      <div class="nexus-card-sm">
+        <div class="nexus-stat-label">섹터 비중</div>
+        <div id="donut-center-wrap">
+          <!-- cDonut will be moved here by JS -->
+          <div style="width:90px;height:90px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:9px" id="donut-center-canvas">차트 로딩중...</div>
+          <div id="donut-center-legend" style="font-size:9px;display:flex;flex-direction:column;gap:4px"></div>
+        </div>
+      </div>
+      <!-- 평가 손익 -->
+      <div class="nexus-card-sm">
+        <div class="nexus-stat-label">평가 손익</div>
+        <div class="nexus-stat-value" id="nc-gain" style="color:var(--oj)">—</div>
+        <div class="nexus-stat-badge oj" id="nc-gain-pct">— %</div>
+      </div>
+      <!-- 총 투자액 -->
+      <div class="nexus-card-sm">
+        <div class="nexus-stat-label">총 투자액</div>
+        <div class="nexus-stat-value" id="nc-invest">—</div>
+        <div class="nexus-stat-badge bl" id="nc-count">— 종목</div>
+      </div>
+    </div>
+
+    <!-- MAIN ASSETS (NexusBank card wrap) -->
+    <div class="nexus-card si" style="animation-delay:.08s;margin-top:14px;padding:16px 18px">
       <div class="sec-hd">
         <div class="sec-hd-tag" style="border-left:2.5px solid var(--blue)">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -1794,8 +1934,8 @@ canvas { border-radius: 1.5rem; }
       </div>
     </div>
 
-    <!-- OTHER ASSETS -->
-    <div class="asset-section si" style="animation-delay:.10s">
+    <!-- OTHER ASSETS (NexusBank card wrap) -->
+    <div class="nexus-card si" style="animation-delay:.10s;margin-top:14px;padding:16px 18px">
       <div class="sec-hd">
         <div class="sec-hd-tag" style="border-left:2.5px solid var(--pu)">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--pu)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -1815,20 +1955,20 @@ canvas { border-radius: 1.5rem; }
       </div>
     </div>
 
-    <!-- 매입원금 요약 -->
-    <div class="si" style="animation-delay:.11s;padding:6px 10px 8px;border-bottom:1px solid var(--b2)">
-      <div style="display:flex;gap:8px">
-        <div style="flex:1;background:var(--s2);border:1px solid var(--b2);border-radius:6px;padding:7px 10px">
-          <div style="font-size:7px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px">총 매입원금</div>
-          <div style="font-size:11px;font-weight:700;font-family:var(--font-mono),monospace" id="v-acq">—</div>
+    <!-- 매입원금 요약 (NexusBank card) -->
+    <div class="nexus-card si" style="animation-delay:.11s;margin-top:14px;padding:14px 18px">
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;background:var(--s2);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:10px 12px">
+          <div style="font-size:8px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">총 매입원금</div>
+          <div style="font-size:12px;font-weight:700;font-family:var(--font-mono),monospace" id="v-acq">—</div>
         </div>
-        <div style="flex:1;background:var(--s2);border:1px solid var(--b2);border-radius:6px;padding:7px 10px">
-          <div style="font-size:7px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px">평가 손익 (₩)</div>
-          <div style="font-size:11px;font-weight:700;font-family:var(--font-mono),monospace" id="v-gain2">—</div>
+        <div style="flex:1;background:var(--s2);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:10px 12px">
+          <div style="font-size:8px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">평가 손익 (₩)</div>
+          <div style="font-size:12px;font-weight:700;font-family:var(--font-mono),monospace" id="v-gain2">—</div>
         </div>
-        <div style="flex:1;background:var(--s2);border:1px solid var(--b2);border-radius:6px;padding:7px 10px">
-          <div style="font-size:7px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px">수익률</div>
-          <div style="font-size:11px;font-weight:700;font-family:var(--font-mono),monospace" id="v-gain-pct2">—</div>
+        <div style="flex:1;background:var(--s2);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:10px 12px">
+          <div style="font-size:8px;font-weight:600;color:var(--t3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px">수익률</div>
+          <div style="font-size:12px;font-weight:700;font-family:var(--font-mono),monospace" id="v-gain-pct2">—</div>
         </div>
       </div>
     </div>
@@ -1872,6 +2012,33 @@ canvas { border-radius: 1.5rem; }
 
     <!-- DEFAULT: AI + 랭킹 + 거래 (내 자산 탭용) -->
     <div id="rp-default">
+
+    <!-- GLASS PORTFOLIO CARD -->
+    <div class="glass-card" style="margin-bottom:14px">
+      <div class="glass-card-label">Total Balance</div>
+      <div class="glass-card-total" id="rp-glass-total">—</div>
+      <div class="glass-card-change" id="rp-glass-change" style="color:var(--t3)">전일비 —</div>
+      <div class="glass-card-row">
+        <div class="glass-card-mini">
+          <div class="glass-card-mini-label">목표 달성</div>
+          <div class="glass-card-mini-val" id="rp-glass-goal">—%</div>
+        </div>
+        <div class="glass-card-mini">
+          <div class="glass-card-mini-label">보유 종목</div>
+          <div class="glass-card-mini-val" id="rp-glass-count">—</div>
+        </div>
+      </div>
+      <div class="glass-card-row" style="margin-top:8px">
+        <div class="glass-card-mini">
+          <div class="glass-card-mini-label">USD/KRW</div>
+          <div class="glass-card-mini-val" id="rp-glass-fx">1,440</div>
+        </div>
+        <div class="glass-card-mini">
+          <div class="glass-card-mini-label">LAST UPDATE</div>
+          <div class="glass-card-mini-val" id="rp-glass-date" style="font-size:10px">—</div>
+        </div>
+      </div>
+    </div>
 
     <!-- AI BRIEFING -->
     <div class="panel-hd si" style="animation-delay:.06s;background:var(--s1)">
@@ -2068,23 +2235,13 @@ const CI_LOGOS = {
 
 function makeLogo(ticker, size, accent, circular) {
   const svg = CI_LOGOS[ticker];
-  const safeAccent = accent || 'var(--blue)';
-  /* hex → r,g,b 변환 */
-  const hex2rgb = (hex) => {
-    const h = hex.replace('#','');
-    const r = parseInt(h.substring(0,2),16);
-    const g = parseInt(h.substring(2,4),16);
-    const b = parseInt(h.substring(4,6),16);
-    return r+','+g+','+b;
-  };
-  const rgb = safeAccent.startsWith('#') ? hex2rgb(safeAccent) : '41,161,123';
-  const containerStyle = `width:${size}px;height:${size}px;border-radius:50%;background:linear-gradient(135deg,rgba(${rgb},0.15) 0%,rgba(${rgb},0.02) 100%);border:1px solid rgba(${rgb},0.3);box-shadow:0 0 8px rgba(${rgb},0.15),inset 0 0 6px rgba(${rgb},0.05);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;backdrop-filter:blur(4px);`;
+  const safeAccent = accent || '#29A17B';
+  const cStyle = `width:${size}px; height:${size}px; border-radius:50%; background:#11181C; border:1px solid rgba(255,255,255,0.08); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; position:relative;`;
   if (svg) {
-    const scale = (ticker==='TSM'||ticker==='MU'||ticker==='CEG') ? 1.0 : 0.65;
-    const inner = Math.round(size * scale);
-    return `<div style="${containerStyle}"><div style="width:${inner}px;height:${inner}px;display:flex;align-items:center;justify-content:center;">${svg.replace(/width=["']\d+["']/,'width="'+inner+'"').replace(/height=["']\d+["']/,'height="'+inner+'"')}</div></div>`;
+    const scale = (['TSM','MU','CEG','NVDA','SOXL','IONQ','CRCL'].includes(ticker)) ? 1.05 : 0.65;
+    return `<div style="${cStyle}"><div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform:scale(${scale});">${svg}</div></div>`;
   }
-  return `<div style="${containerStyle}"><span style="font-size:${Math.round(size*0.38)}px;font-weight:800;font-family:var(--font-sans);color:rgba(${rgb},0.9);letter-spacing:-0.5px;text-shadow:0 0 6px rgba(${rgb},0.4);">${ticker.slice(0,2)}</span></div>`;
+  return `<div style="${cStyle}"><div style="position:absolute; inset:0; background:${safeAccent}; opacity:0.15;"></div><span style="font-size:${Math.round(size*0.4)}px; font-weight:800; font-family:var(--font-sans); color:${safeAccent}; z-index:1; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">${ticker.slice(0,2)}</span></div>`;
 }
 /* ════════════════════════════════════════
    DATA SOURCE — TD (엑셀 기반) 전용
@@ -2511,51 +2668,61 @@ function manualSync(){
 }
 
 /* ── 헤더 지수 인덱스 바 업데이트 ── */
-function updateHeaderIndices() {
-  /* SCORING_DATA에서 ^GSPC, ^IXIC 읽기 → 없으면 SA_DATA에서 시도 */
-  var pairs = [
-    {el:'idx-sp', tickers:['^GSPC','SPY']},
-    {el:'idx-ndx', tickers:['^IXIC','QQQ']},
-    {el:'idx-dow', tickers:['^DJI','DIA']},
-    {el:'idx-rut', tickers:['^RUT','IWM']}
+async function updateHeaderIndices() {
+  const indices = [
+    { el: 'idx-sp',  symbol: '^GSPC', backup: 'SPY' },
+    { el: 'idx-ndx', symbol: '^IXIC', backup: 'QQQ' },
+    { el: 'idx-dow', symbol: '^DJI',  backup: 'DIA' },
+    { el: 'idx-rut', symbol: '^RUT',  backup: 'IWM' }
   ];
-  pairs.forEach(function(p) {
-    var val = null;
-    /* 1차: SCORING_DATA에서 인덱스 또는 대리 ETF */
+  for (let i = 0; i < indices.length; i++) {
+    const item = indices[i];
+    let price = 0, chg = 0, found = false;
+    /* 1차: SCORING_DATA */
     if (typeof SCORING_DATA !== 'undefined') {
-      for (var i = 0; i < p.tickers.length; i++) {
-        var sc = SCORING_DATA[p.tickers[i]];
-        if (sc && sc.raw && sc.raw.price > 0) {
-          val = { price: sc.raw.price, chg: sc.raw.chg_pct || 0 };
-          break;
-        }
+      const sc = SCORING_DATA[item.symbol] || SCORING_DATA[item.backup];
+      if (sc && sc.raw && sc.raw.price > 0) {
+        price = sc.raw.price; chg = sc.raw.chg_pct || 0; found = true;
       }
     }
-    /* 2차: SA TD 데이터에서 대리 ETF */
-    if (!val && typeof SA !== 'undefined' && SA.getTD) {
-      var td = SA.getTD();
+    /* 2차: SA TD 데이터 */
+    if (!found && typeof SA !== 'undefined' && SA.getTD) {
+      const td = SA.getTD();
       if (td) {
-        for (var i = 0; i < p.tickers.length; i++) {
-          var d = td[p.tickers[i]];
-          if (d && d.summary && d.summary.p > 0) {
-            var chg = 0;
-            if (d.daily && d.daily.length >= 2) {
-              var t2 = d.daily[d.daily.length-1].c, y2 = d.daily[d.daily.length-2].c;
-              if (y2 > 0) chg = (t2 - y2) / y2 * 100;
-            }
-            val = { price: d.summary.p, chg: +chg.toFixed(2) };
-            break;
+        const d = td[item.symbol] || td[item.backup];
+        if (d && d.summary && d.summary.p > 0) {
+          price = d.summary.p;
+          if (d.daily && d.daily.length >= 2) {
+            const y2 = d.daily[d.daily.length-2].c;
+            if (y2 > 0) chg = ((price - y2) / y2) * 100;
           }
+          found = true;
         }
       }
     }
-    var el = document.getElementById(p.el);
-    if (el && val) {
-      var sign = val.chg >= 0 ? '+' : '';
-      el.textContent = val.price.toLocaleString('en-US', {maximumFractionDigits:0}) + ' (' + sign + val.chg.toFixed(2) + '%)';
-      el.className = 'index-val ' + (val.chg > 0 ? 'up' : val.chg < 0 ? 'dn' : 'flat');
+    /* 3차: Yahoo Finance CORS 프록시 폴백 */
+    if (!found) {
+      try {
+        const url = 'https://corsproxy.io/?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/' + item.symbol + '?range=2d&interval=1d');
+        const r = await fetch(url, { signal: AbortSignal.timeout(5000) });
+        const data = await r.json();
+        const meta = data.chart.result[0].meta;
+        price = meta.regularMarketPrice;
+        const prev = meta.chartPreviousClose || meta.previousClose || price;
+        chg = prev > 0 ? ((price - prev) / prev) * 100 : 0;
+        found = true;
+      } catch(e) { console.warn('Index fetch failed:', item.symbol); }
     }
-  });
+    if (found) {
+      const el = document.getElementById(item.el);
+      if (el) {
+        const sign = chg >= 0 ? '+' : '';
+        el.textContent = price.toLocaleString('en-US', {maximumFractionDigits:0}) + ' (' + sign + chg.toFixed(2) + '%)';
+        el.className = 'index-val ' + (chg > 0 ? 'up' : chg < 0 ? 'dn' : 'flat');
+        el.style.color = chg > 0 ? 'var(--up)' : (chg < 0 ? 'var(--dn)' : 'var(--t3)');
+      }
+    }
+  }
 }
 
 /* ── 헤더 총 평가액 + 전일비 업데이트 ── */
@@ -2772,13 +2939,17 @@ function renderTradePreview() {
   const recent=tradeHistory.slice(0,4);
   el.innerHTML=recent.map(log=>{
     const pos=log.profitKrw>=0, col=pos?'var(--up)':'var(--dn)';
+    const bgCol=pos?'var(--up-lo)':'var(--dn-lo)';
+    const icon=log.type==='매도'?'↗':'↙';
     const d=new Date(log.date);
     const ds=`${d.getMonth()+1}/${d.getDate()}`;
-    return `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b2)">
-      <span style="font-size:11px;font-weight:700;min-width:38px;color:var(--t2);font-family:'IBM Plex Mono',monospace">${log.asset}</span>
-      <span style="font-size:9.5px;padding:1px 5px;border-radius:3px;background:var(--b3);color:var(--t3);font-family:'IBM Plex Mono',monospace;flex-shrink:0">${log.type}</span>
-      <span style="font-size:9.5px;color:var(--t3);font-family:'IBM Plex Mono',monospace;flex:1">${ds}</span>
-      <span style="font-size:11px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:${col}">${pos?'+':'-'}${fmtMs(Math.abs(log.profitKrw))}M</span>
+    return `<div class="nexus-tx-item">
+      <div class="nexus-tx-ico" style="background:${bgCol};color:${col}">${icon}</div>
+      <div class="nexus-tx-info">
+        <div class="nexus-tx-name">${log.asset} · ${log.type}</div>
+        <div class="nexus-tx-date">${ds}</div>
+      </div>
+      <div class="nexus-tx-amt" style="color:${col}">${pos?'+':'-'}${fmtMs(Math.abs(log.profitKrw))}M</div>
     </div>`;
   }).join('')+(tradeHistory.length>4?`<div style="text-align:center;padding:7px 0;font-size:10px;color:var(--t3);cursor:pointer" onclick="openTrade()">전체 보기 →</div>`:'');
 }
@@ -3137,9 +3308,72 @@ function initDash() {
     </div>`;
   }).join('');
 
-  renderTicker();
   renderTradePreview();
   buildCharts(sectors,dVals);
+
+  /* ─── NexusBank: 센터 카드 + 글래스 카드 동기화 ─── */
+  syncGlassCard(s, gain, gPct);
+  syncCenterCards(s, gain, gPct, totAcq);
+}
+
+/* ═══ NexusBank Sync Functions ═══ */
+function syncGlassCard(s, gain, gPct) {
+  var el;
+  el = document.getElementById('rp-glass-total');
+  if (el) el.textContent = fmt(s.total) + '원';
+  el = document.getElementById('rp-glass-change');
+  if (el) {
+    el.textContent = (gain >= 0 ? '+' : '') + fmtMs(gain) + 'M 원';
+    el.style.color = gain >= 0 ? 'var(--up)' : 'var(--dn)';
+  }
+  el = document.getElementById('rp-glass-goal');
+  if (el) el.textContent = s.pct + '%';
+  el = document.getElementById('rp-glass-count');
+  if (el) el.textContent = (mainData.length + otherData.length) + '종';
+  el = document.getElementById('rp-glass-fx');
+  if (el) el.textContent = FX.toLocaleString('ko-KR');
+  el = document.getElementById('rp-glass-date');
+  if (el) {
+    var dt = document.getElementById('tb-date');
+    el.textContent = dt ? dt.textContent : '—';
+  }
+}
+function syncCenterCards(s, gain, gPct, totAcq) {
+  var el;
+  el = document.getElementById('nc-gain');
+  if (el) {
+    el.textContent = (gain >= 0 ? '+' : '') + fmtMs(gain) + 'M원';
+    el.style.color = gain >= 0 ? 'var(--oj)' : 'var(--dn)';
+  }
+  el = document.getElementById('nc-gain-pct');
+  if (el) {
+    el.textContent = (gPct >= 0 ? '+' : '') + gPct.toFixed(2) + '%';
+    el.className = 'nexus-stat-badge ' + (gPct >= 0 ? 'oj' : 'dn');
+  }
+  el = document.getElementById('nc-invest');
+  if (el) el.textContent = fmt(totAcq) + '원';
+  el = document.getElementById('nc-count');
+  if (el) el.textContent = (mainData.length + otherData.length) + ' 종목';
+}
+
+/* ═══ Donut → Center Migration ═══ */
+var _donutMoved = false;
+function moveDonutToCenter() {
+  if (_donutMoved) return;
+  var canvas = document.getElementById('cDonut');
+  var wrap = document.getElementById('donut-center-canvas');
+  if (canvas && wrap) {
+    wrap.innerHTML = '';
+    wrap.style.cssText = 'width:90px;height:90px;flex-shrink:0';
+    wrap.appendChild(canvas);
+    _donutMoved = true;
+    if (window.myDonut) requestAnimationFrame(function(){ window.myDonut.resize(); });
+  }
+  var oldLeg = document.getElementById('donutLg');
+  var newLeg = document.getElementById('donut-center-legend');
+  if (oldLeg && newLeg) {
+    newLeg.innerHTML = oldLeg.innerHTML;
+  }
 }
 
 /* CHARTS */
@@ -3234,6 +3468,9 @@ function buildCharts(sectors,dVals){
         tooltip:{...tt,callbacks:{label:ctx=>{const dS=dVals.reduce((a,b)=>a+b,0);const val=dVals[ctx.dataIndex];return [` ${ctx.label}`,` ${((val/dS)*100).toFixed(1)}% · ${val>=1e8?(val/1e8).toFixed(1)+'억':(val/1e6).toFixed(0)+'M₩'}`]}}}}},
     plugins:[donutLabelPlugin]
   });
+
+  /* NexusBank: 도넛을 센터 카드로 이동 */
+  requestAnimationFrame(function() { moveDonutToCenter(); });
 }
 
 /* ─── SA ↔ mainData 동기화 헬퍼 (전일비 수정 완료) ─── */
@@ -4076,6 +4313,9 @@ function switchCenterTab(tabId) {
   ['assets','supply','watch','analyst'].forEach(function(t) {
     var btn = document.getElementById('ctab-' + t);
     if (btn) btn.classList.toggle('on', tabId === t);
+    /* 아이콘 사이드바 active 토글 */
+    var inav = document.getElementById('inav-' + t);
+    if (inav) inav.classList.toggle('active', tabId === t);
   });
   /* 센터 패널 전환 */
   document.getElementById('tab-assets').style.display     = tabId === 'assets'  ? '' : 'none';
@@ -4685,5 +4925,6 @@ function switchCenterTab(tabId) {
 })();
 </script>
 
+</div><!-- /content-area -->
 </body>
 </html>
