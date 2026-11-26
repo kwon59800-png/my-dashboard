@@ -944,19 +944,21 @@ var DEFAULT_COSTS = [
   { id:'c4', name:'주유 · 고속도로 (예상)', amt:5000, cur:'JPY', split:4, cat:'transport', memo:'오사카·교토 왕복', ic:'⛽' },
   { id:'c5', name:'산토리 교토 맛투어 (4명)', amt:4000, cur:'JPY', split:4, cat:'tour', memo:'1인 ¥1,000', ic:'🍺' },
   { id:'c6', name:'하루카스 300 (4명)', amt:7200, cur:'JPY', split:4, cat:'tour', memo:'1인 ¥1,800', ic:'🌃' },
-  { id:'c7', name:'마운자로 UB클리닉 (4인)', amt:185340, cur:'JPY', split:4, cat:'medical', memo:'1인 ¥46,335 (착불 ¥1,335 포함)', ic:'💉' },
+  { id:'c7', name:'마운자로 UB클리닉 · 5mg 12펜 (3인)', amt:139005, cur:'JPY', split:3, cat:'medical', memo:'3인 × ¥46,335 (펜 ¥45,000 + 착불 ¥1,335)', ic:'💉' },
+  { id:'c7b', name:'마운자로 UB클리닉 · 2.5mg 12펜 (임지은)', amt:25335, cur:'JPY', split:1, cat:'medical', memo:'¥24,000 + 착불 ¥1,335', ic:'💉' },
   { id:'c8', name:'식비 (예상)', amt:72000, cur:'JPY', split:4, cat:'food', memo:'1인 1일 ¥6,000 × 3일', ic:'🍽️' }
 ];
 
 /* ---------------- state ---------------- */
 var LS_KEY = 'osakaTripApp.v2';
+var COST_VER = 2; /* 기본 경비 항목 버전 — 올리면 저장본의 기본 항목 금액/라벨이 자동 갱신된다 */
 function defaultMember(){ return { checks:{}, memo:'', duty:{ b:0, l:'', usd:'' }, spotNotes:{} }; }
 
 function load(){
   var base = {
     profile:'hyeoksan', rate:896, budget:3200000,
     members:{}, costs:DEFAULT_COSTS.map(function(c){ return Object.assign({},c); }),
-    open:{ 1:true, 2:true, 3:true }, mapFilter:'all', mini:false
+    open:{ 1:true, 2:true, 3:true }, mapFilter:'all', mini:false, costVer:COST_VER
   };
   MEMBERS.forEach(function(m){ base.members[m.id] = defaultMember(); });
   try{
@@ -971,6 +973,21 @@ function load(){
       out.members[m.id].spotNotes = out.members[m.id].spotNotes || {};
     });
     if(!Array.isArray(out.costs)) out.costs = base.costs;
+    /* 기본 항목(id c1~c8)은 최신 기본값으로 갱신 — 사용자가 직접 추가한 항목은 그대로 둔다 */
+    var migrated = false;
+    if((s.costVer || 1) < COST_VER){
+      migrated = true;
+      DEFAULT_COSTS.forEach(function(d){
+        var ex = out.costs.filter(function(c){ return c.id === d.id; })[0];
+        if(ex){
+          ex.name = d.name; ex.amt = d.amt; ex.cur = d.cur; ex.split = d.split;
+          ex.memo = d.memo; ex.ic = d.ic; ex.cat = d.cat;
+        } else if(d.id === 'c7b' && out.costs.some(function(c){ return c.id === 'c7'; })){
+          out.costs.push(Object.assign({}, d)); /* 기존 마운자로 항목이 남아 있을 때만 새 2.5mg 항목을 추가 */
+        }
+      });
+    }
+    out.costVer = COST_VER;
     /* 기존 저장본에 카테고리가 없으면 기본 항목 id로 되살린다 */
     out.costs = out.costs.map(function(c){
       if(!c.cat){
@@ -982,6 +999,7 @@ function load(){
     if(!out.rate || out.rate < 50) out.rate = 896;
     if(!out.budget || out.budget < 1000) out.budget = 3200000;
     if(!out.open) out.open = base.open;
+    if(migrated){ try{ localStorage.setItem(LS_KEY, JSON.stringify(out)); }catch(e){} }
     return out;
   }catch(e){ return base; }
 }
