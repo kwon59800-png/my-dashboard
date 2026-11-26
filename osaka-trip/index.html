@@ -971,6 +971,14 @@ function load(){
       out.members[m.id].spotNotes = out.members[m.id].spotNotes || {};
     });
     if(!Array.isArray(out.costs)) out.costs = base.costs;
+    /* 기존 저장본에 카테고리가 없으면 기본 항목 id로 되살린다 */
+    out.costs = out.costs.map(function(c){
+      if(!c.cat){
+        var d = DEFAULT_COSTS.filter(function(x){ return x.id === c.id; })[0];
+        c.cat = d ? d.cat : 'etc';
+      }
+      return c;
+    });
     if(!out.rate || out.rate < 50) out.rate = 896;
     if(!out.budget || out.budget < 1000) out.budget = 3200000;
     if(!out.open) out.open = base.open;
